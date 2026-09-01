@@ -25,5 +25,8 @@ COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
+# 127.0.0.1 explícito, no "localhost": nginx solo escucha en IPv4 y el wget de busybox
+# resuelve "localhost" primero a ::1 (IPv6) sin caer de vuelta a IPv4, dando siempre
+# "Connection refused" aunque el sitio funcione bien.
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD wget -qO- http://localhost/ >/dev/null 2>&1 || exit 1
+    CMD wget -qO- http://127.0.0.1/ >/dev/null 2>&1 || exit 1
