@@ -5,8 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
-// TODO: cambiar por el dominio real antes de desplegar (afecta a sitemap, canonical y OG tags)
-const SITE_URL = 'https://kaizogroup.com';
+const SITE_URL = 'https://kaizogroup.es';
 
 // https://astro.build/config
 export default defineConfig({

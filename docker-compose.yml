@@ -1,0 +1,45 @@
+# Escenario por defecto: el host ya tiene un Traefik compartido (típico de un PaaS
+# tipo Coolify/CapRover/Dokploy o un Traefik propio) escuchando en 80/443 y
+# descubriendo servicios por labels en una red Docker externa.
+#
+# Si NO es tu caso (no hay Traefik delante), usa docker-compose.standalone.yml en su
+# lugar — trae su propio Caddy con TLS automático y no necesita nada externo.
+#
+# Variables esperadas en .env (junto a este fichero, no el .env de `npm run dev`):
+#   SITE_DOMAIN=kaizogroup.com
+#   TRAEFIK_NETWORK=proxy          # nombre real de la red externa de tu Traefik
+#   PUBLIC_WEB3FORMS_ACCESS_KEY=...
+#   PUBLIC_PLAUSIBLE_DOMAIN=...
+#   PUBLIC_CLARITY_ID=...
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PUBLIC_WEB3FORMS_ACCESS_KEY: ${PUBLIC_WEB3FORMS_ACCESS_KEY:-}
+        PUBLIC_PLAUSIBLE_DOMAIN: ${PUBLIC_PLAUSIBLE_DOMAIN:-}
+        PUBLIC_CLARITY_ID: ${PUBLIC_CLARITY_ID:-}
+    image: kaizogroup-web:latest
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=${TRAEFIK_NETWORK:-proxy}"
+      - "traefik.http.routers.kaizogroup.rule=Host(`${SITE_DOMAIN}`)"
+      - "traefik.http.routers.kaizogroup.entrypoints=websecure"
+      - "traefik.http.routers.kaizogroup.tls=true"
+      - "traefik.http.routers.kaizogroup.tls.certresolver=letsencrypt"
+      - "traefik.http.services.kaizogroup.loadbalancer.server.port=80"
+      # Redirección http -> https, solo aplica si tu Traefik expone un entrypoint "web" en :80
+      - "traefik.http.routers.kaizogroup-insecure.rule=Host(`${SITE_DOMAIN}`)"
+      - "traefik.http.routers.kaizogroup-insecure.entrypoints=web"
+      - "traefik.http.routers.kaizogroup-insecure.middlewares=kaizogroup-https-redirect"
+      - "traefik.http.middlewares.kaizogroup-https-redirect.redirectscheme.scheme=https"
+
+networks:
+  proxy:
+    external: true
+    name: ${TRAEFIK_NETWORK:-proxy}

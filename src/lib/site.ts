@@ -2,15 +2,16 @@ export const siteConfig = {
   name: 'KaizoGroup',
   tagline: 'Estudio de diseño y desarrollo de software',
   description:
-    'KaizoGroup diseña y desarrolla software a medida, webs de alto rendimiento y el CRM/PaaS propio de KaizoGroup para negocios que quieren dejar de perder clientes por una mala presencia digital.',
-  url: 'https://kaizogroup.com', // TODO: sincronizar con `site` en astro.config.mjs
+    'KaizoGroup diseña y desarrolla software a medida y webs de alto rendimiento para negocios de Puertollano, Ciudad Real y el resto de España que quieren dejar de perder clientes por una mala presencia digital.',
+  url: 'https://kaizogroup.es', // sincronizado con `site` en astro.config.mjs
   locale: 'es-ES',
-  serviceArea: ['Puertollano', 'Ciudad Real', 'España'], // TODO: ajustar alcance real
+  // Puertollano/Ciudad Real como mercado local prioritario (SEO local), España como alcance general
+  serviceArea: ['Puertollano', 'Ciudad Real', 'España'],
   contact: {
-    email: 'hola@kaizogroup.com', // TODO: email real
-    phone: '+34 600 000 000', // TODO: teléfono real
-    calendlyUrl: '', // TODO: enlace de Calendly si se activa
-    googleBusinessUrl: '', // TODO: ficha de Google Business Profile
+    email: 'jorgeolmo.I@gmail.com',
+    phone: '+34 693 834 114',
+    calendlyUrl: '', // vacío por ahora — ver guía en el README para activarlo
+    googleBusinessUrl: '', // ficha aún no creada
   },
   social: {
     linkedin: '', // TODO
