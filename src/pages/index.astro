@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ProblemSection from '../components/ProblemSection.astro';
+import SolutionSection from '../components/SolutionSection.astro';
+import Portfolio from '../components/Portfolio.astro';
+import Process from '../components/Process.astro';
+import SocialProof from '../components/SocialProof.astro';
+import ContactSection from '../components/ContactSection.astro';
+import FAQSection from '../components/FAQSection.astro';
+import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
+import { siteConfig } from '../lib/site';
+---
+
+<BaseLayout
+  title={`${siteConfig.name} — ${siteConfig.tagline}`}
+  description="Desarrollo web y software a medida en Puertollano y Ciudad Real. Auditoría gratuita sin compromiso."
+>
+  <Header />
+  <main id="main-content">
+    <Hero />
+    <ProblemSection />
+    <SolutionSection />
+    <Portfolio />
+    <Process />
+    <SocialProof />
+    <ContactSection />
+    <FAQSection />
+  </main>
+  <Footer />
+  <Analytics slot="head" />
+</BaseLayout>

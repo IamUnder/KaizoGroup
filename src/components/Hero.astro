@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import kaizoMark from '../assets/kaizo-mark.png';
+---
+
+<section class="relative overflow-hidden border-b border-hairline bg-canvas-deep">
+  <Image
+    src={kaizoMark}
+    alt=""
+    width={900}
+    height={877}
+    loading="eager"
+    class="pointer-events-none absolute -right-24 top-1/2 hidden w-[560px] -translate-y-1/2 opacity-[0.06] sm:block lg:w-[720px]"
+  />
+
+  <div class="container-kz relative section-kz">
+    <div class="max-w-2xl">
+      <p class="mb-5 font-mono text-xs uppercase tracking-[0.15em] text-accent">
+        Diseño y desarrollo de software
+      </p>
+
+      <h1 class="font-display text-[40px] leading-[1.05] font-600 text-ink sm:text-[56px] lg:text-[76px]">
+        [Titular placeholder: la propuesta de valor de KaizoGroup en una frase]
+      </h1>
+
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-body">
+        [Subtítulo placeholder: qué hace KaizoGroup, para quién, y por qué importa — dos frases como máximo.]
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-4">
+        <a href="#contacto" class="btn-primary" data-analytics-event="cta_hero_click">
+          Auditoría gratis
+        </a>
+        <a href="#porfolio" class="btn-outline">
+          Ver mi trabajo
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

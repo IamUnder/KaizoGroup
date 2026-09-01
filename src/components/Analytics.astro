@@ -1,0 +1,73 @@
+---
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as string | undefined;
+const clarityId = import.meta.env.PUBLIC_CLARITY_ID as string | undefined;
+---
+
+{
+  plausibleDomain && (
+    <script
+      is:inline
+      defer
+      data-domain={plausibleDomain}
+      event-name-props="true"
+      src="https://plausible.io/js/script.tagged-events.js"
+    />
+  )
+}
+
+{
+  plausibleDomain && (
+    <script is:inline>
+      window.plausible =
+        window.plausible ||
+        function () {
+          (window.plausible.q = window.plausible.q || []).push(arguments);
+        };
+    </script>
+  )
+}
+
+<script>
+  // Delega clics en cualquier elemento con data-analytics-event a Plausible,
+  // y escucha el evento custom que dispara el formulario de contacto al enviarse con éxito.
+  const track = (eventName: string, props?: Record<string, string>) => {
+    // @ts-expect-error — plausible se inyecta globalmente solo si PUBLIC_PLAUSIBLE_DOMAIN está definido
+    if (typeof window.plausible === 'function') {
+      // @ts-expect-error
+      window.plausible(eventName, props ? { props } : undefined);
+    }
+  };
+
+  document.addEventListener('click', (event) => {
+    const target = (event.target as HTMLElement)?.closest<HTMLElement>('[data-analytics-event]');
+    if (!target) return;
+    const eventName = target.dataset.analyticsEvent;
+    if (!eventName) return;
+    const project = target.dataset.analyticsProject;
+    track(eventName, project ? { project } : undefined);
+  });
+
+  window.addEventListener('kz:analytics', (event) => {
+    const detail = (event as CustomEvent<{ event: string }>).detail;
+    if (detail?.event) track(detail.event);
+  });
+</script>
+
+{
+  clarityId && (
+    <script is:inline define:vars={{ clarityId }}>
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = 'https://www.clarity.ms/tag/' + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, 'clarity', 'script', clarityId);
+    </script>
+  )
+}

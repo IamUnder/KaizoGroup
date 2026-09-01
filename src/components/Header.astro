@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import kaizoMark from '../assets/kaizo-mark.png';
+import { siteConfig } from '../lib/site';
+import Icon from './Icon.astro';
+---
+
+<header class="sticky top-0 z-40 border-b border-hairline bg-canvas-deep/90 backdrop-blur">
+  <div class="container-kz flex h-[72px] items-center justify-between">
+    <a href="#main-content" class="flex items-center gap-3 shrink-0" aria-label={`${siteConfig.name} — inicio`}>
+      <Image src={kaizoMark} alt="" width={36} height={36} loading="eager" class="rounded-sm" />
+      <span class="font-display text-lg font-600 tracking-tight text-ink">{siteConfig.name}</span>
+    </a>
+
+    <nav aria-label="Navegación principal" class="hidden items-center gap-8 md:flex">
+      {
+        siteConfig.nav.map((item) => (
+          <a
+            href={item.href}
+            class="font-body text-sm text-body transition-colors hover:text-ink"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href="#contacto" class="btn-primary hidden text-sm sm:inline-flex">
+        {siteConfig.ctaPrimaryLabel}
+      </a>
+
+      <!-- Menú móvil sin JS: <details>/<summary> nativo -->
+      <details class="relative md:hidden">
+        <summary
+          class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-sm border border-hairline text-ink [&::-webkit-details-marker]:hidden"
+          aria-label="Abrir menú"
+        >
+          <Icon name="chevron-down" class="size-5" />
+        </summary>
+        <nav
+          aria-label="Navegación móvil"
+          class="absolute right-0 top-[calc(100%+8px)] flex w-56 flex-col gap-1 rounded-md border border-hairline bg-surface-card p-2 shadow-lg"
+        >
+          {
+            siteConfig.nav.map((item) => (
+              <a href={item.href} class="rounded-sm px-3 py-2 text-sm text-body hover:bg-surface-card-elevated hover:text-ink">
+                {item.label}
+              </a>
+            ))
+          }
+          <a href="#contacto" class="btn-primary mt-1 justify-center text-sm">
+            {siteConfig.ctaPrimaryLabel}
+          </a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

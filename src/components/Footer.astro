@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets';
+import kaizoMark from '../assets/kaizo-mark.png';
+import { siteConfig } from '../lib/site';
+
+const currentYear = new Date().getFullYear();
+
+const socialLinks = Object.entries(siteConfig.social).filter(([, url]) => url);
+---
+
+<footer class="bg-canvas-deep">
+  <div class="container-kz grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <div class="flex items-center gap-3">
+        <Image src={kaizoMark} alt="" width={28} height={28} loading="lazy" class="rounded-sm" />
+        <span class="font-display text-base font-600 text-ink">{siteConfig.name}</span>
+      </div>
+      <p class="mt-4 max-w-xs text-sm leading-relaxed text-body-soft">{siteConfig.tagline}</p>
+    </div>
+
+    <div>
+      <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">Contacto</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li>
+          <a href={`mailto:${siteConfig.contact.email}`} class="text-body hover:text-ink">
+            {siteConfig.contact.email}
+          </a>
+        </li>
+        <li>
+          <a href={`tel:${siteConfig.contact.phone.replace(/\s+/g, '')}`} class="text-body hover:text-ink">
+            {siteConfig.contact.phone}
+          </a>
+        </li>
+        {
+          siteConfig.contact.googleBusinessUrl && (
+            <li>
+              <a href={siteConfig.contact.googleBusinessUrl} target="_blank" rel="noopener noreferrer" class="text-body hover:text-ink">
+                Google Business Profile
+              </a>
+            </li>
+          )
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">Navegación</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        {
+          siteConfig.nav.map((item) => (
+            <li>
+              <a href={item.href} class="text-body hover:text-ink">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">Legal</h3>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a href="/legal/aviso-legal" class="text-body hover:text-ink">Aviso legal</a></li>
+        <li><a href="/legal/privacidad" class="text-body hover:text-ink">Privacidad</a></li>
+      </ul>
+      {
+        socialLinks.length > 0 && (
+          <ul class="mt-5 flex gap-4">
+            {socialLinks.map(([key, url]) => (
+              <li>
+                <a href={url} target="_blank" rel="noopener noreferrer" class="text-body-soft hover:text-ink capitalize">
+                  {key}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="border-t border-hairline py-6">
+    <p class="container-kz text-xs text-muted">
+      © {currentYear} {siteConfig.name}. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>

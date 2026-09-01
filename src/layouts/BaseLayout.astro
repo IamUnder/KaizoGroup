@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import { siteConfig } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Ruta absoluta o relativa a /public de la imagen OG (1200x630 recomendado) */
+  ogImage?: string;
+  /** Desactiva el JSON-LD de LocalBusiness en páginas que no lo necesiten (legal, etc.) */
+  includeLocalBusinessSchema?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/og-image.png',
+  includeLocalBusinessSchema = true,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+
+const pageTitle = title.includes(siteConfig.name) ? title : `${title} · ${siteConfig.name}`;
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: siteConfig.name,
+  description: siteConfig.description,
+  url: siteConfig.url,
+  areaServed: siteConfig.serviceArea.map((area) => ({ '@type': 'City', name: area })),
+  email: siteConfig.contact.email,
+  telephone: siteConfig.contact.phone,
+  image: ogImageURL.toString(),
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content={siteConfig.name} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    {
+      includeLocalBusinessSchema && (
+        <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} is:inline />
+      )
+    }
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-accent focus:text-accent-ink focus:px-4 focus:py-2 focus:rounded-sm"
+    >
+      Saltar al contenido principal
+    </a>
+    <slot />
+
+    <script>
+      // Fade-up mínimo al entrar en viewport — sin dependencias.
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.15 }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
