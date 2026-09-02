@@ -3,7 +3,9 @@ export const siteConfig = {
   tagline: 'Estudio de diseño y desarrollo de software',
   description:
     'KaizoGroup diseña y desarrolla software a medida y webs de alto rendimiento para negocios de Puertollano, Ciudad Real y el resto de España que quieren dejar de perder clientes por una mala presencia digital.',
-  url: 'https://kaizogroup.es', // sincronizado con `site` en astro.config.mjs
+  // TODO: cambiar a 'https://kaizogroup.es' junto con `site` en astro.config.mjs en cuanto el
+  // dominio esté comprado — debe ser siempre la URL donde el sitio está realmente servido.
+  url: 'https://test.kaizenfit.es',
   locale: 'es-ES',
   // Puertollano/comarca y Ciudad Real como mercado local prioritario (SEO local), España como alcance general
   serviceArea: ['Puertollano', 'Almodóvar del Campo', 'Argamasilla de Calatrava', 'Ciudad Real', 'España'],
