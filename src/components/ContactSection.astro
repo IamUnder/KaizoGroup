@@ -28,7 +28,15 @@ import { siteConfig } from '../lib/site';
       class="reveal rounded-lg border border-hairline bg-surface-card p-6 sm:p-8"
       novalidate
     >
-      <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+      <input
+        type="checkbox"
+        name="botcheck"
+        class="hidden"
+        style="display:none"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+      />
 
       <div class="grid gap-5 sm:grid-cols-2">
         <div class="sm:col-span-1">
