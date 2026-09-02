@@ -57,10 +57,10 @@ export type PortfolioItem = {
 
 export const portfolio: PortfolioItem[] = [
   {
-    name: 'CRM/PaaS de KaizoGroup',
+    name: 'Portledger',
     description:
-      'La plataforma interna que usamos en KaizoGroup para gestionar clientes y proyectos. No está expuesta públicamente, pero podemos enseñarte cómo trabajamos en una demo cerrada.',
-    image: '/portfolio/placeholder-1.svg',
+      'El CRM/PaaS interno que usamos en KaizoGroup para gestionar clientes, proyectos e infraestructura. No está expuesto públicamente, pero podemos enseñarte cómo trabajamos en una demo cerrada.',
+    image: '/portfolio/crmpaas.jpg',
     stack: ['Prisma', 'React'],
     url: '#contacto',
     status: 'Demo bajo petición',
