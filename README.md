@@ -89,6 +89,42 @@ Pasos:
 Netlify y Vercel funcionan igual de bien para este proyecto (`npm run build` / `dist`) si ya tienes
 cuenta en alguno de ellos — la diferencia práctica aquí es marginal.
 
+## Despliegue con Docker
+
+Alternativa a Cloudflare Pages si prefieres autoalojar en tu propio servidor/PaaS. Hay dos ficheros
+de compose — usa **uno u otro**, no ambos a la vez:
+
+| Fichero | Cuándo usarlo |
+|---|---|
+| `docker-compose.yml` | El servidor ya tiene un **Traefik** delante (típico de un PaaS como Coolify/CapRover/Dokploy, o un Traefik propio) escuchando en 80/443 y descubriendo servicios por labels en una red Docker externa. Este compose solo levanta el contenedor del sitio y lo registra en Traefik vía labels — no abre puertos propios. |
+| `docker-compose.standalone.yml` | No hay ningún proxy delante. Este compose trae su propio **Caddy** con TLS automático (Let's Encrypt) en 80/443. Autocontenido, no depende de nada externo. |
+
+Antes de levantar cualquiera de los dos, copia `.env.example` a `.env` y rellena, además de las
+`PUBLIC_*`, estas dos (usadas solo por Docker, no por `npm run dev`):
+
+- `SITE_DOMAIN` — dominio real de producción.
+- `TRAEFIK_NETWORK` — nombre de la red Docker externa de tu Traefik (solo aplica a
+  `docker-compose.yml`; averígualo con `docker network ls` en el servidor).
+
+```bash
+# Con Traefik/PaaS existente
+docker compose up -d --build
+
+# Standalone con Caddy propio
+docker compose -f docker-compose.standalone.yml up -d --build
+```
+
+**Importante:** `docker-compose.yml` asume que tu Traefik tiene un certresolver llamado
+`letsencrypt` (línea `traefik.http.routers.kaizogroup.tls.certresolver=letsencrypt` en el fichero) y
+un entrypoint `websecure` para HTTPS y `web` para HTTP — son los nombres por defecto más comunes,
+pero si tu Traefik usa otros nombres hay que ajustarlos ahí. **Aún no hemos confirmado si tu PaaS usa
+Traefik ni cómo está configurado** — verifícalo antes del primer despliegue real; mientras tanto,
+`docker-compose.standalone.yml` es la opción que funciona sin depender de esa configuración.
+
+Las variables `PUBLIC_WEB3FORMS_ACCESS_KEY`, `PUBLIC_PLAUSIBLE_DOMAIN` y `PUBLIC_CLARITY_ID` se
+pasan como *build args* (no como env vars de runtime) porque Astro las resuelve en build time y
+quedan horneadas en el HTML/JS estático — están ya cableadas así en el `Dockerfile` y ambos compose.
+
 ## Analítica — eventos configurados
 
 Con `PUBLIC_PLAUSIBLE_DOMAIN` definido, se registran automáticamente:

@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { siteConfig } from '../../lib/site';
 ---
 
 <BaseLayout
@@ -13,10 +14,83 @@ import Footer from '../../components/Footer.astro';
   <main id="main-content" class="section-kz">
     <div class="container-kz max-w-2xl">
       <h1 class="text-3xl font-display font-600 text-ink">Aviso legal</h1>
-      <p class="mt-6 text-body">
-        [Placeholder: página de aviso legal pendiente de redactar — datos identificativos de la
-        empresa, condiciones de uso del sitio, propiedad intelectual, etc.]
-      </p>
+      <p class="mt-4 text-sm text-body-soft">Última actualización: 2 de septiembre de 2026</p>
+
+      <div class="mt-10 space-y-10 text-body">
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">1. Datos identificativos del titular</h2>
+          <p class="mt-3 leading-relaxed">
+            En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002, de
+            11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico
+            (LSSI-CE), se ponen a disposición los siguientes datos:
+          </p>
+          <ul class="mt-3 list-inside list-disc space-y-1 leading-relaxed">
+            <li>Titular: [Nombre completo o razón social del titular]</li>
+            <li>NIF/CIF: [NIF o CIF]</li>
+            <li>Nombre comercial: {siteConfig.name}</li>
+            <li>Domicilio: [Dirección fiscal completa]</li>
+            <li>Email de contacto: {siteConfig.contact.email}</li>
+            <li>Teléfono: {siteConfig.contact.phone}</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">2. Objeto y ámbito de aplicación</h2>
+          <p class="mt-3 leading-relaxed">
+            El presente aviso legal regula el uso del sitio web {siteConfig.url} (en adelante, "el
+            Sitio"), propiedad de {siteConfig.name}. La navegación por el Sitio atribuye la condición
+            de usuario e implica la aceptación plena de las condiciones aquí recogidas.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">3. Condiciones de uso</h2>
+          <p class="mt-3 leading-relaxed">
+            El usuario se compromete a hacer un uso adecuado de los contenidos y servicios del Sitio y
+            a no emplearlos para incurrir en actividades ilícitas o contrarias a la buena fe y al
+            ordenamiento legal, ni para causar daños en los sistemas físicos o lógicos de{' '}
+            {siteConfig.name}, de sus proveedores o de terceros.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">4. Propiedad intelectual e industrial</h2>
+          <p class="mt-3 leading-relaxed">
+            Todos los contenidos del Sitio (textos, imágenes, marcas, logotipos, diseño, código
+            fuente) son propiedad de {siteConfig.name} o de terceros que han autorizado su uso, y
+            están protegidos por la normativa de propiedad intelectual e industrial. Queda prohibida
+            su reproducción, distribución o transformación total o parcial sin autorización expresa.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">5. Exclusión de responsabilidad</h2>
+          <p class="mt-3 leading-relaxed">
+            {siteConfig.name} no se hace responsable de los daños y perjuicios que pudieran derivarse
+            de interferencias, interrupciones, virus informáticos o desconexiones en el
+            funcionamiento del Sitio motivadas por causas ajenas a {siteConfig.name}, ni de los
+            daños causados por un mal uso del Sitio por parte del usuario.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">6. Enlaces a terceros</h2>
+          <p class="mt-3 leading-relaxed">
+            El Sitio puede contener enlaces a sitios web de terceros (por ejemplo, proyectos del
+            porfolio o herramientas de agenda). {siteConfig.name} no asume responsabilidad alguna
+            sobre el contenido, políticas de privacidad o prácticas de dichos sitios.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">7. Legislación aplicable y jurisdicción</h2>
+          <p class="mt-3 leading-relaxed">
+            Las presentes condiciones se rigen por la legislación española. Para la resolución de
+            cualquier controversia, las partes se someterán a los juzgados y tribunales que
+            correspondan conforme a derecho.
+          </p>
+        </section>
+      </div>
     </div>
   </main>
   <Footer />

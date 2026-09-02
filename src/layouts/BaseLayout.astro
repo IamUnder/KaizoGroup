@@ -33,6 +33,17 @@ const localBusinessSchema = {
   email: siteConfig.contact.email,
   telephone: siteConfig.contact.phone,
   image: ogImageURL.toString(),
+  knowsAbout: [
+    'Desarrollo de software a medida',
+    'Diseño y desarrollo web',
+    'SEO técnico',
+    'Mantenimiento de aplicaciones',
+  ],
+  makesOffer: [
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desarrollo de software a medida' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diseño y desarrollo web' } },
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mantenimiento y soporte de aplicaciones' } },
+  ],
 };
 ---
 
@@ -46,6 +57,7 @@ const localBusinessSchema = {
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={siteConfig.keywords.join(', ')} />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->

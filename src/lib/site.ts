@@ -2,15 +2,27 @@ export const siteConfig = {
   name: 'KaizoGroup',
   tagline: 'Estudio de diseño y desarrollo de software',
   description:
-    'KaizoGroup diseña y desarrolla software a medida, webs de alto rendimiento y el CRM/PaaS propio de KaizoGroup para negocios que quieren dejar de perder clientes por una mala presencia digital.',
-  url: 'https://kaizogroup.com', // TODO: sincronizar con `site` en astro.config.mjs
+    'KaizoGroup diseña y desarrolla software a medida y webs de alto rendimiento para negocios de Puertollano, Ciudad Real y el resto de España que quieren dejar de perder clientes por una mala presencia digital.',
+  // TODO: cambiar a 'https://kaizogroup.es' junto con `site` en astro.config.mjs en cuanto el
+  // dominio esté comprado — debe ser siempre la URL donde el sitio está realmente servido.
+  url: 'https://test.kaizenfit.es',
   locale: 'es-ES',
-  serviceArea: ['Puertollano', 'Ciudad Real', 'España'], // TODO: ajustar alcance real
+  // Puertollano/comarca y Ciudad Real como mercado local prioritario (SEO local), España como alcance general
+  serviceArea: ['Puertollano', 'Almodóvar del Campo', 'Argamasilla de Calatrava', 'Ciudad Real', 'España'],
+  keywords: [
+    'desarrollo de software Puertollano',
+    'desarrollo de software a medida',
+    'diseño y desarrollo web Puertollano',
+    'programador Puertollano',
+    'desarrollo de aplicaciones Ciudad Real',
+    'software a medida Ciudad Real',
+    'agencia de desarrollo web Ciudad Real',
+  ],
   contact: {
-    email: 'hola@kaizogroup.com', // TODO: email real
-    phone: '+34 600 000 000', // TODO: teléfono real
-    calendlyUrl: '', // TODO: enlace de Calendly si se activa
-    googleBusinessUrl: '', // TODO: ficha de Google Business Profile
+    email: 'jorgeolmo.I@gmail.com',
+    phone: '+34 693 834 114',
+    calendlyUrl: 'https://calendly.com/jorgeolmo-i/30min',
+    googleBusinessUrl: '', // ficha aún no creada
   },
   social: {
     linkedin: '', // TODO
