@@ -6,47 +6,53 @@ import { portfolio } from '../data/content';
   <div class="container-kz">
     <div class="reveal max-w-2xl">
       <p class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">Porfolio</p>
-      <h2 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">
-        [Titular placeholder: proyectos ya construidos]
-      </h2>
+      <h2 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">Proyectos ya construidos</h2>
     </div>
 
     <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
-        portfolio.map((project) => (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="reveal group block overflow-hidden rounded-lg border border-hairline bg-surface-card transition-colors hover:border-body-soft"
-            data-analytics-event="portfolio_card_click"
-            data-analytics-project={project.name}
-          >
-            <div class="relative aspect-[16/10] overflow-hidden">
-              <img
-                src={project.image}
-                alt={`Captura de ${project.name}`}
-                width="640"
-                height="400"
-                loading="lazy"
-                decoding="async"
-                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-              />
-              <div class="absolute inset-0 bg-canvas-deep/0 transition-colors duration-300 group-hover:bg-canvas-deep/30" />
-            </div>
-            <div class="p-5">
-              <h3 class="font-display text-base font-600 text-ink">{project.name}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-body">{project.description}</p>
-              <ul class="mt-4 flex flex-wrap gap-2">
-                {project.stack.map((tech) => (
-                  <li class="rounded-full border border-hairline px-2.5 py-1 font-mono text-[11px] text-body-soft">
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </a>
-        ))
+        portfolio.map((project) => {
+          const isExternal = project.url.startsWith('http');
+          return (
+            <a
+              href={project.url}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
+              class="reveal group block overflow-hidden rounded-lg border border-hairline bg-surface-card transition-colors hover:border-body-soft"
+              data-analytics-event="portfolio_card_click"
+              data-analytics-project={project.name}
+            >
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={`Captura de ${project.name}`}
+                  width="640"
+                  height="400"
+                  loading="lazy"
+                  decoding="async"
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                />
+                <div class="absolute inset-0 bg-canvas-deep/0 transition-colors duration-300 group-hover:bg-canvas-deep/30" />
+                {project.status && (
+                  <span class="absolute right-3 top-3 rounded-full border border-hairline bg-canvas-deep/80 px-2.5 py-1 font-mono text-[11px] text-body-soft backdrop-blur">
+                    {project.status}
+                  </span>
+                )}
+              </div>
+              <div class="p-5">
+                <h3 class="font-display text-base font-600 text-ink">{project.name}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-body">{project.description}</p>
+                <ul class="mt-4 flex flex-wrap gap-2">
+                  {project.stack.map((tech) => (
+                    <li class="rounded-full border border-hairline px-2.5 py-1 font-mono text-[11px] text-body-soft">
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </a>
+          );
+        })
       }
     </div>
   </div>

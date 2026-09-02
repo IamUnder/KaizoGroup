@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import kaizoMark from '../assets/kaizo-mark.png';
+import Icon from './Icon.astro';
 ---
 
 <section class="relative overflow-hidden border-b border-hairline bg-canvas-deep">
@@ -16,15 +17,16 @@ import kaizoMark from '../assets/kaizo-mark.png';
   <div class="container-kz relative section-kz">
     <div class="max-w-2xl">
       <p class="mb-5 font-mono text-xs uppercase tracking-[0.15em] text-accent">
-        Diseño y desarrollo de software
+        Kaizen — mejora continua aplicada a software
       </p>
 
       <h1 class="font-display text-[40px] leading-[1.05] font-600 text-ink sm:text-[56px] lg:text-[76px]">
-        [Titular placeholder: la propuesta de valor de KaizoGroup en una frase]
+        Software a medida que simplifica el día a día de tu negocio
       </h1>
 
       <p class="mt-6 max-w-xl text-lg leading-relaxed text-body">
-        [Subtítulo placeholder: qué hace KaizoGroup, para quién, y por qué importa — dos frases como máximo.]
+        Detectamos qué problema está frenando a tu empresa y lo resolvemos con tecnología — y
+        seguimos a tu lado después del lanzamiento, no desaparecemos al entregar el proyecto.
       </p>
 
       <div class="mt-9 flex flex-wrap items-center gap-4">
@@ -35,6 +37,11 @@ import kaizoMark from '../assets/kaizo-mark.png';
           Ver mi trabajo
         </a>
       </div>
+
+      <p class="mt-8 flex items-center gap-2 font-mono text-xs text-body-soft">
+        <Icon name="map-pin" class="size-4 text-body-soft" />
+        Puertollano y Ciudad Real — y en remoto para el resto de España
+      </p>
     </div>
   </div>
 </section>
