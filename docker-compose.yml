@@ -9,7 +9,7 @@
 #   SITE_DOMAIN=kaizogroup.com
 #   TRAEFIK_NETWORK=proxy          # nombre real de la red externa de tu Traefik
 #   PUBLIC_WEB3FORMS_ACCESS_KEY=...
-#   PUBLIC_PLAUSIBLE_DOMAIN=...
+#   PUBLIC_UMAMI_WEBSITE_ID=...
 #   PUBLIC_CLARITY_ID=...
 
 services:
@@ -19,7 +19,8 @@ services:
       dockerfile: Dockerfile
       args:
         PUBLIC_WEB3FORMS_ACCESS_KEY: ${PUBLIC_WEB3FORMS_ACCESS_KEY:-}
-        PUBLIC_PLAUSIBLE_DOMAIN: ${PUBLIC_PLAUSIBLE_DOMAIN:-}
+        PUBLIC_UMAMI_WEBSITE_ID: ${PUBLIC_UMAMI_WEBSITE_ID:-}
+        PUBLIC_UMAMI_SRC: ${PUBLIC_UMAMI_SRC:-}
         PUBLIC_CLARITY_ID: ${PUBLIC_CLARITY_ID:-}
     image: kaizogroup-web:latest
     restart: unless-stopped

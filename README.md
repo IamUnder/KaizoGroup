@@ -43,7 +43,8 @@ cp .env.example .env
 | Variable | Para qué sirve | Obligatoria |
 |---|---|---|
 | `PUBLIC_WEB3FORMS_ACCESS_KEY` | Clave pública de [Web3Forms](https://web3forms.com) para que el formulario de contacto envíe emails sin backend propio. | Sí, si no está el formulario avisa en pantalla de que falta configurar. |
-| `PUBLIC_PLAUSIBLE_DOMAIN` | Dominio registrado en [Plausible Analytics](https://plausible.io). Si se deja vacío, no se carga ningún script de analítica. | No |
+| `PUBLIC_UMAMI_WEBSITE_ID` | ID del sitio en [Umami Analytics](https://umami.is) (plan cloud gratuito). Si se deja vacío, no se carga ningún script de analítica. | No |
+| `PUBLIC_UMAMI_SRC` | Solo si autoalojas Umami en vez de usar `cloud.umami.is` — URL de tu propio `script.js`. | No |
 | `PUBLIC_CLARITY_ID` | ID de proyecto de [Microsoft Clarity](https://clarity.microsoft.com) para mapa de calor. Si se deja vacío, no se carga. | No |
 
 **¿Por qué Web3Forms y no Formspree?** Web3Forms no requiere crear cuenta con verificación de email
@@ -51,10 +52,10 @@ por formulario, tiene un plan gratuito más generoso, responde directamente en J
 redirecciones) y no añade marca de agua visible. Formspree es la alternativa si en algún momento
 necesitas su panel de gestión de envíos más avanzado.
 
-**¿Por qué Plausible y no Umami?** Plausible cloud es más sencillo de arrancar (sin self-host que
-mantener), su script es ~1KB, no usa cookies (no requiere banner de consentimiento) y sus eventos
-personalizados encajan igual de bien con Astro. Umami es preferible solo si ya tienes infraestructura
-propia donde autoalojarlo sin coste adicional.
+**¿Por qué Umami y no Plausible?** Plausible cloud no tiene plan gratuito permanente (solo prueba de
+30 días, luego desde 9$/mes); autoalojarlo sí es gratis pero añade un servicio más que mantener.
+Umami cloud tiene un plan gratuito real (100k eventos/mes, 3 sitios, sin tarjeta), no usa cookies
+(no requiere banner de consentimiento) y sus eventos personalizados encajan igual de bien con Astro.
 
 ## Comandos
 
@@ -121,13 +122,13 @@ pero si tu Traefik usa otros nombres hay que ajustarlos ahí. **Aún no hemos co
 Traefik ni cómo está configurado** — verifícalo antes del primer despliegue real; mientras tanto,
 `docker-compose.standalone.yml` es la opción que funciona sin depender de esa configuración.
 
-Las variables `PUBLIC_WEB3FORMS_ACCESS_KEY`, `PUBLIC_PLAUSIBLE_DOMAIN` y `PUBLIC_CLARITY_ID` se
+Las variables `PUBLIC_WEB3FORMS_ACCESS_KEY`, `PUBLIC_UMAMI_WEBSITE_ID` y `PUBLIC_CLARITY_ID` se
 pasan como *build args* (no como env vars de runtime) porque Astro las resuelve en build time y
 quedan horneadas en el HTML/JS estático — están ya cableadas así en el `Dockerfile` y ambos compose.
 
 ## Analítica — eventos configurados
 
-Con `PUBLIC_PLAUSIBLE_DOMAIN` definido, se registran automáticamente:
+Con `PUBLIC_UMAMI_WEBSITE_ID` definido, se registran automáticamente:
 
 - `cta_hero_click` — clic en el CTA principal del hero.
 - `portfolio_card_click` — clic en una tarjeta de porfolio (con el nombre del proyecto como prop).
