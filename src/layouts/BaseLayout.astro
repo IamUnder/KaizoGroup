@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { siteConfig } from '../lib/site';
+import { ui, resolveLang } from '../i18n/ui';
 
 interface Props {
   title: string;
@@ -9,6 +10,8 @@ interface Props {
   ogImage?: string;
   /** Desactiva el JSON-LD de LocalBusiness en páginas que no lo necesiten (legal, etc.) */
   includeLocalBusinessSchema?: boolean;
+  /** Ruta equivalente en el otro idioma (para hreflang) si no se puede derivar automáticamente */
+  altPath?: string;
 }
 
 const {
@@ -16,39 +19,58 @@ const {
   description,
   ogImage = '/og-image.png',
   includeLocalBusinessSchema = true,
+  altPath,
 } = Astro.props;
+
+const lang = resolveLang(Astro.currentLocale);
+const t = ui[lang];
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(ogImage, Astro.site);
 
 const pageTitle = title.includes(siteConfig.name) ? title : `${title} · ${siteConfig.name}`;
 
+// hreflang: por defecto, la misma ruta con/sin el prefijo /en (páginas espejo como la home).
+// Para páginas cuyo slug cambia entre idiomas (ej. legales), pásalo explícito con `altPath`.
+const defaultAltPath =
+  lang === 'es' ? `/en${Astro.url.pathname}` : Astro.url.pathname.replace(/^\/en/, '') || '/';
+const esPath = lang === 'es' ? Astro.url.pathname : altPath ?? defaultAltPath;
+const enPath = lang === 'en' ? Astro.url.pathname : altPath ?? defaultAltPath;
+const esURL = new URL(esPath, Astro.site);
+const enURL = new URL(enPath, Astro.site);
+
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: siteConfig.name,
-  description: siteConfig.description,
+  description,
   url: siteConfig.url,
+  inLanguage: lang,
   areaServed: siteConfig.serviceArea.map((area) => ({ '@type': 'City', name: area })),
   email: siteConfig.contact.email,
   telephone: siteConfig.contact.phone,
   image: ogImageURL.toString(),
-  knowsAbout: [
-    'Desarrollo de software a medida',
-    'Diseño y desarrollo web',
-    'SEO técnico',
-    'Mantenimiento de aplicaciones',
-  ],
-  makesOffer: [
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desarrollo de software a medida' } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diseño y desarrollo web' } },
-    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mantenimiento y soporte de aplicaciones' } },
-  ],
+  knowsAbout:
+    lang === 'es'
+      ? ['Desarrollo de software a medida', 'Diseño y desarrollo web', 'SEO técnico', 'Mantenimiento de aplicaciones']
+      : ['Custom software development', 'Web design and development', 'Technical SEO', 'Application maintenance'],
+  makesOffer:
+    lang === 'es'
+      ? [
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desarrollo de software a medida' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diseño y desarrollo web' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mantenimiento y soporte de aplicaciones' } },
+        ]
+      : [
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom software development' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web design and development' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Application maintenance and support' } },
+        ],
 };
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={t.htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -57,8 +79,11 @@ const localBusinessSchema = {
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content={siteConfig.keywords.join(', ')} />
+    <meta name="keywords" content={t.meta.keywords.join(', ')} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={esURL} />
+    <link rel="alternate" hreflang="en" href={enURL} />
+    <link rel="alternate" hreflang="x-default" href={esURL} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -66,7 +91,7 @@ const localBusinessSchema = {
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content={t.ogLocale} />
     <meta property="og:site_name" content={siteConfig.name} />
 
     <!-- Twitter Card -->
@@ -89,7 +114,7 @@ const localBusinessSchema = {
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-accent focus:text-accent-ink focus:px-4 focus:py-2 focus:rounded-sm"
     >
-      Saltar al contenido principal
+      {t.skipToContent}
     </a>
     <slot />
 

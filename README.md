@@ -16,21 +16,47 @@ src/
 │   └── kaizo-mark.png     Isotipo "KA" (variante monocroma)
 ├── components/         Un componente por sección de la landing (Header, Hero, ProblemSection,
 │                        SolutionSection, Portfolio, Process, SocialProof, ContactSection,
-│                        FAQSection, Footer) + Icon.astro (set de iconos inline) y Analytics.astro
+│                        FAQSection, Footer) + Icon.astro (set de iconos inline) y Analytics.astro.
+│                        Todos leen el idioma con `resolveLang(Astro.currentLocale)`.
+├── i18n/
+│   └── ui.ts             Diccionario de TODOS los textos fijos de interfaz (nav, botones,
+│                         cabeceras de sección, formulario, footer) en español e inglés.
 ├── data/
-│   └── content.ts       Todo el copy placeholder: pain points, soluciones, porfolio, proceso,
-│                         testimonios y FAQ. Editar aquí, no en los componentes.
+│   └── content.ts       Datos por idioma (pain points, soluciones, porfolio, proceso, FAQ) vía
+│                         `getContent(lang)`. Editar aquí, no en los componentes.
 ├── layouts/
-│   └── BaseLayout.astro  <head> completo: SEO, OG/Twitter, JSON-LD LocalBusiness, favicon
+│   └── BaseLayout.astro  <head> completo: SEO, OG/Twitter, JSON-LD LocalBusiness, hreflang, favicon
 ├── lib/
-│   └── site.ts           Config central: nombre, contacto, redes, navegación (placeholders)
+│   └── site.ts           Config central independiente de idioma: nombre, dominio, contacto, redes,
+│                          datos legales (NIF, domicilio)
 ├── pages/
-│   ├── index.astro        Ensambla todas las secciones
+│   ├── index.astro        Home en español (locale por defecto, sin prefijo /es/)
+│   ├── en/index.astro     Home en inglés (bajo /en/)
 │   ├── robots.txt.ts      robots.txt generado en base a `site` de astro.config.mjs
-│   └── legal/              Aviso legal y privacidad (placeholders)
+│   └── legal/, en/legal/   Aviso legal y privacidad, en ambos idiomas (slugs distintos por idioma)
 └── styles/
     └── global.css          Tokens de diseño (@theme de Tailwind v4) + estilos base
 ```
+
+### Idiomas (i18n)
+
+El sitio usa el i18n nativo de Astro (`astro.config.mjs` → `i18n`): español en la raíz (`/`) e
+inglés bajo `/en/`, sin librerías ni JS extra — es routing 100% estático.
+
+**Para añadir/editar contenido en un idioma que ya existe**: edita `src/i18n/ui.ts` (textos fijos:
+títulos de sección, botones, formulario, footer) y `src/data/content.ts` (datos: pain points,
+soluciones, porfolio, proceso, FAQ). Los componentes no cambian.
+
+**Para añadir una página nueva en los dos idiomas**: crea el `.astro` en `src/pages/` (español) y su
+equivalente en `src/pages/en/` (inglés). Si el slug es igual en ambos idiomas (como la home), el
+selector de idioma del header lo detecta solo. Si el slug cambia entre idiomas (como las legales,
+`/legal/aviso-legal` vs `/en/legal/legal-notice`), pásale `altPath` explícito a `<BaseLayout>` y a
+`<Header>` con la ruta completa a la página equivalente — mira `src/pages/legal/aviso-legal.astro`
+como referencia.
+
+**Para añadir un tercer idioma**: añádelo a `locales` en `astro.config.mjs`, a `Lang` en
+`src/i18n/ui.ts` (con su diccionario completo) y a `content.ts`, y crea las páginas bajo
+`src/pages/<código-idioma>/`.
 
 ## Variables de entorno
 

@@ -1,14 +1,19 @@
 ---
 import Icon from './Icon.astro';
-import { painPoints } from '../data/content';
+import { getContent } from '../data/content';
+import { ui, resolveLang } from '../i18n/ui';
+
+const lang = resolveLang(Astro.currentLocale);
+const t = ui[lang].problem;
+const { painPoints } = getContent(lang);
 ---
 
 <section id="problema" class="section-kz border-b border-hairline bg-canvas">
   <div class="container-kz">
     <div class="reveal max-w-2xl">
-      <p class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">El problema</p>
+      <p class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">{t.eyebrow}</p>
       <h2 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">
-        Lo que frena a la mayoría de negocios
+        {t.h2}
       </h2>
     </div>
 

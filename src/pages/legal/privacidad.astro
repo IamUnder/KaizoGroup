@@ -3,18 +3,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { siteConfig } from '../../lib/site';
+
+const altPath = '/en/legal/privacy-policy/';
 ---
 
 <BaseLayout
   title="Política de privacidad"
   description="Política de privacidad de KaizoGroup."
   includeLocalBusinessSchema={false}
+  altPath={altPath}
 >
-  <Header />
+  <Header altPath={altPath} />
   <main id="main-content" class="section-kz">
     <div class="container-kz max-w-2xl">
       <h1 class="text-3xl font-display font-600 text-ink">Política de privacidad</h1>
-      <p class="mt-4 text-sm text-body-soft">Última actualización: 2 de septiembre de 2026</p>
+      <p class="mt-4 text-sm text-body-soft">Última actualización: 7 de septiembre de 2026</p>
 
       <div class="mt-10 space-y-10 text-body">
         <section>
@@ -57,9 +60,11 @@ import { siteConfig } from '../../lib/site';
             salvo obligación legal.
           </p>
           <p class="mt-3 leading-relaxed">
-            Si en el futuro se activa alguna herramienta de analítica web (actualmente el Sitio no usa
-            ninguna por defecto), se informará en esta misma página de qué datos agregados y anónimos
-            se recogen y con qué finalidad.
+            Además, este Sitio utiliza <strong>Umami Analytics</strong> para estadísticas de uso
+            agregadas y anónimas (no utiliza cookies ni identifica a usuarios individuales), y{' '}
+            <strong>Microsoft Clarity</strong> para mapas de calor y grabaciones de sesión anonimizadas
+            que ayudan a mejorar la usabilidad del Sitio. Ninguna de las dos herramientas se usa con
+            fines publicitarios ni de perfilado comercial.
           </p>
         </section>
 
@@ -99,9 +104,10 @@ import { siteConfig } from '../../lib/site';
         <section>
           <h2 class="font-display text-lg font-600 text-ink">8. Cookies</h2>
           <p class="mt-3 leading-relaxed">
-            Este Sitio no utiliza cookies propias ni de terceros con fines analíticos o publicitarios
-            por defecto. Si esto cambia en el futuro, se actualizará esta política y se solicitará el
-            consentimiento del usuario cuando la normativa lo requiera.
+            Este Sitio no utiliza cookies propias. Microsoft Clarity, la herramienta de analítica de
+            comportamiento que usamos, puede almacenar alguna cookie técnica o de sesión para
+            diferenciar visitas anónimas; Umami Analytics no utiliza cookies en absoluto. Ninguna se
+            emplea con fines publicitarios ni de seguimiento entre sitios.
           </p>
         </section>
       </div>

@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { siteConfig } from '../../../lib/site';
+
+const altPath = '/legal/aviso-legal/';
+---
+
+<BaseLayout
+  title="Legal Notice"
+  description="Legal notice for KaizoGroup."
+  includeLocalBusinessSchema={false}
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content" class="section-kz">
+    <div class="container-kz max-w-2xl">
+      <h1 class="text-3xl font-display font-600 text-ink">Legal Notice</h1>
+      <p class="mt-4 text-sm text-body-soft">Last updated: September 7, 2026</p>
+
+      <div class="mt-10 space-y-10 text-body">
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">1. Identification of the site owner</h2>
+          <p class="mt-3 leading-relaxed">
+            In compliance with the information duty set out in Article 10 of Spanish Law 34/2002, of
+            July 11, on Information Society Services and Electronic Commerce (LSSI-CE), the following
+            details are provided:
+          </p>
+          <ul class="mt-3 list-inside list-disc space-y-1 leading-relaxed">
+            <li>Owner: {siteConfig.legal.titular}</li>
+            <li>Tax ID (NIF): {siteConfig.legal.nif}</li>
+            <li>Trade name: {siteConfig.name}</li>
+            <li>Registered address: {siteConfig.legal.domicilio}, Spain</li>
+            <li>Contact email: {siteConfig.contact.email}</li>
+            <li>Phone: {siteConfig.contact.phone}</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">2. Purpose and scope</h2>
+          <p class="mt-3 leading-relaxed">
+            This legal notice governs the use of the website {siteConfig.url} (the "Site"), owned by
+            {siteConfig.name}. Browsing the Site grants user status and implies full acceptance of the
+            terms set out here. The Site is available in Spanish (the reference version) and in
+            English as a courtesy to international visitors; in case of any discrepancy between the
+            two versions, the Spanish version prevails.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">3. Terms of use</h2>
+          <p class="mt-3 leading-relaxed">
+            Users agree to make appropriate use of the Site's content and services, and not to use
+            them to engage in unlawful activity or activity contrary to good faith and applicable law,
+            nor to cause damage to the physical or logical systems of {siteConfig.name}, its providers,
+            or third parties.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">4. Intellectual and industrial property</h2>
+          <p class="mt-3 leading-relaxed">
+            All content on the Site (text, images, trademarks, logos, design, source code) is the
+            property of {siteConfig.name} or third parties who have authorized its use, and is
+            protected under intellectual and industrial property law. Reproduction, distribution, or
+            transformation, in whole or in part, without express authorization is prohibited.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">5. Limitation of liability</h2>
+          <p class="mt-3 leading-relaxed">
+            {siteConfig.name} is not liable for any damages arising from interference, interruptions,
+            computer viruses, or disconnections in the operation of the Site caused by factors beyond
+            the control of {siteConfig.name}, nor for damages caused by improper use of the Site by
+            users.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">6. Third-party links</h2>
+          <p class="mt-3 leading-relaxed">
+            The Site may contain links to third-party websites (for example, portfolio projects or
+            scheduling tools). {siteConfig.name} assumes no responsibility for the content, privacy
+            policies, or practices of those sites.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">7. Governing law and jurisdiction</h2>
+          <p class="mt-3 leading-relaxed">
+            These terms are governed by Spanish law. Any dispute will be submitted to the courts and
+            tribunals with jurisdiction under applicable law.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

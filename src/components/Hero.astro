@@ -2,6 +2,10 @@
 import { Image } from 'astro:assets';
 import kaizoMark from '../assets/kaizo-mark.png';
 import Icon from './Icon.astro';
+import { ui, resolveLang } from '../i18n/ui';
+
+const lang = resolveLang(Astro.currentLocale);
+const t = ui[lang].hero;
 ---
 
 <section class="relative overflow-hidden border-b border-hairline bg-canvas-deep">
@@ -17,30 +21,29 @@ import Icon from './Icon.astro';
   <div class="container-kz relative section-kz">
     <div class="max-w-2xl">
       <p class="mb-5 font-mono text-xs uppercase tracking-[0.15em] text-accent">
-        Kaizen — mejora continua aplicada a software
+        {t.eyebrow}
       </p>
 
       <h1 class="font-display text-[40px] leading-[1.05] font-600 text-ink sm:text-[56px] lg:text-[76px]">
-        Software a medida que simplifica el día a día de tu negocio
+        {t.h1}
       </h1>
 
       <p class="mt-6 max-w-xl text-lg leading-relaxed text-body">
-        Detectamos qué problema está frenando a tu empresa y lo resolvemos con tecnología — y
-        seguimos a tu lado después del lanzamiento, no desaparecemos al entregar el proyecto.
+        {t.subtitle}
       </p>
 
       <div class="mt-9 flex flex-wrap items-center gap-4">
         <a href="#contacto" class="btn-primary" data-analytics-event="cta_hero_click">
-          Auditoría gratis
+          {t.ctaPrimary}
         </a>
         <a href="#porfolio" class="btn-outline">
-          Ver mi trabajo
+          {t.ctaSecondary}
         </a>
       </div>
 
       <p class="mt-8 flex items-center gap-2 font-mono text-xs text-body-soft">
         <Icon name="map-pin" class="size-4 text-body-soft" />
-        Puertollano y Ciudad Real — y en remoto para el resto de España
+        {t.location}
       </p>
     </div>
   </div>

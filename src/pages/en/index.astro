@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import ProblemSection from '../../components/ProblemSection.astro';
+import SolutionSection from '../../components/SolutionSection.astro';
+import Portfolio from '../../components/Portfolio.astro';
+import Process from '../../components/Process.astro';
+import ContactSection from '../../components/ContactSection.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import Footer from '../../components/Footer.astro';
+import Analytics from '../../components/Analytics.astro';
+import { siteConfig } from '../../lib/site';
+import { ui, resolveLang } from '../../i18n/ui';
+
+const lang = resolveLang(Astro.currentLocale);
+const t = ui[lang];
+---
+
+<BaseLayout
+  title={`${siteConfig.name} — Custom Software Development in Puertollano and Ciudad Real, Spain`}
+  description={t.meta.description}
+>
+  <Header />
+  <main id="main-content">
+    <Hero />
+    <ProblemSection />
+    <SolutionSection />
+    <Portfolio />
+    <Process />
+    {/* SocialProof removed until we have real testimonials — see src/data/content.ts */}
+    <ContactSection />
+    <FAQSection />
+  </main>
+  <Footer />
+  <Analytics slot="head" />
+</BaseLayout>

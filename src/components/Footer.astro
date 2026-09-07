@@ -2,6 +2,10 @@
 import { Image } from 'astro:assets';
 import kaizoMark from '../assets/kaizo-mark.png';
 import { siteConfig } from '../lib/site';
+import { ui, resolveLang } from '../i18n/ui';
+
+const lang = resolveLang(Astro.currentLocale);
+const t = ui[lang];
 
 const currentYear = new Date().getFullYear();
 
@@ -15,14 +19,11 @@ const socialLinks = Object.entries(siteConfig.social).filter(([, url]) => url);
         <Image src={kaizoMark} alt="" width={56} height={56} loading="lazy" class="size-7 rounded-sm" />
         <span class="font-display text-base font-600 text-ink">{siteConfig.name}</span>
       </div>
-      <p class="mt-4 max-w-xs text-sm leading-relaxed text-body-soft">{siteConfig.tagline}</p>
-      <p class="mt-2 max-w-xs text-sm leading-relaxed text-body-soft">
-        Desarrollo de software a medida en Puertollano, Ciudad Real y toda España.
-      </p>
+      <p class="mt-4 max-w-xs text-sm leading-relaxed text-body-soft">{t.meta.tagline}</p>
     </div>
 
     <div>
-      <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">Contacto</h3>
+      <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">{t.footer.contact}</h3>
       <ul class="mt-4 space-y-2 text-sm">
         <li>
           <a href={`mailto:${siteConfig.contact.email}`} class="text-body hover:text-ink">
@@ -38,7 +39,7 @@ const socialLinks = Object.entries(siteConfig.social).filter(([, url]) => url);
           siteConfig.contact.googleBusinessUrl && (
             <li>
               <a href={siteConfig.contact.googleBusinessUrl} target="_blank" rel="noopener noreferrer" class="text-body hover:text-ink">
-                Google Business Profile
+                {t.footer.googleBusiness}
               </a>
             </li>
           )
@@ -47,10 +48,10 @@ const socialLinks = Object.entries(siteConfig.social).filter(([, url]) => url);
     </div>
 
     <div>
-      <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">Navegación</h3>
+      <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">{t.footer.nav}</h3>
       <ul class="mt-4 space-y-2 text-sm">
         {
-          siteConfig.nav.map((item) => (
+          t.nav.map((item) => (
             <li>
               <a href={item.href} class="text-body hover:text-ink">
                 {item.label}
@@ -62,10 +63,17 @@ const socialLinks = Object.entries(siteConfig.social).filter(([, url]) => url);
     </div>
 
     <div>
-      <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">Legal</h3>
+      <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">{t.footer.legal}</h3>
       <ul class="mt-4 space-y-2 text-sm">
-        <li><a href="/legal/aviso-legal" class="text-body hover:text-ink">Aviso legal</a></li>
-        <li><a href="/legal/privacidad" class="text-body hover:text-ink">Privacidad</a></li>
+        {
+          t.footer.legalLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-body hover:text-ink">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
       {
         socialLinks.length > 0 && (
@@ -85,7 +93,7 @@ const socialLinks = Object.entries(siteConfig.social).filter(([, url]) => url);
 
   <div class="border-t border-hairline py-6">
     <p class="container-kz text-xs text-body-soft">
-      © {currentYear} {siteConfig.name}. Todos los derechos reservados.
+      © {currentYear} {siteConfig.name}. {t.footer.rights}
     </p>
   </div>
 </footer>

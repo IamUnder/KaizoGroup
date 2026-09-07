@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { siteConfig } from '../../../lib/site';
+
+const altPath = '/legal/privacidad/';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Privacy policy for KaizoGroup."
+  includeLocalBusinessSchema={false}
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content" class="section-kz">
+    <div class="container-kz max-w-2xl">
+      <h1 class="text-3xl font-display font-600 text-ink">Privacy Policy</h1>
+      <p class="mt-4 text-sm text-body-soft">Last updated: September 7, 2026</p>
+
+      <div class="mt-10 space-y-10 text-body">
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">1. Data controller</h2>
+          <ul class="mt-3 list-inside list-disc space-y-1 leading-relaxed">
+            <li>Controller: {siteConfig.legal.titular}</li>
+            <li>Tax ID (NIF): {siteConfig.legal.nif}</li>
+            <li>Address: {siteConfig.legal.domicilio}, Spain</li>
+            <li>Email: {siteConfig.contact.email}</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">2. Purpose of processing</h2>
+          <p class="mt-3 leading-relaxed">
+            Data submitted through this Site's contact form (name, email, business, and message) is
+            processed in order to respond to inquiries or quote/audit requests sent by the user, and to
+            maintain any business relationship that may arise from that contact. It is not used for any
+            other purpose, and no automated decisions are made based on it.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">3. Legal basis</h2>
+          <p class="mt-3 leading-relaxed">
+            The legal basis for processing is the user's consent, given by voluntarily filling in and
+            submitting the contact form (Art. 6.1.a GDPR), as well as, where applicable, the
+            performance of pre-contractual measures requested by the data subject (Art. 6.1.b GDPR).
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">4. Recipients and data processors</h2>
+          <p class="mt-3 leading-relaxed">
+            The contact form is handled through <strong>Web3Forms</strong>, which acts as a data
+            processor and forwards received messages directly to the email address listed above,
+            without storing them for its own purposes. Data is not shared with third parties except
+            where legally required.
+          </p>
+          <p class="mt-3 leading-relaxed">
+            This Site also uses <strong>Umami Analytics</strong> for aggregated, anonymous usage
+            statistics (it does not use cookies or identify individual users), and{' '}
+            <strong>Microsoft Clarity</strong> for anonymized heatmaps and session recordings that help
+            us improve the Site's usability. Neither tool is used for advertising or commercial
+            profiling.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">5. Retention period</h2>
+          <p class="mt-3 leading-relaxed">
+            Contact form data is kept only for as long as necessary to handle the inquiry and, if a
+            business relationship begins, for as long as that relationship lasts plus any applicable
+            legal retention periods.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">6. Your rights</h2>
+          <p class="mt-3 leading-relaxed">
+            You can exercise your rights of access, rectification, erasure, objection, restriction of
+            processing, and data portability by writing to{' '}
+            <a href={`mailto:${siteConfig.contact.email}`} class="text-ink underline underline-offset-2">
+              {siteConfig.contact.email}
+            </a>
+            , stating which right you wish to exercise and attaching a copy of an identity document.
+            You also have the right to file a complaint with the Spanish Data Protection Agency
+            (www.aepd.es) if you believe the processing does not comply with applicable law.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">7. Source of the data</h2>
+          <p class="mt-3 leading-relaxed">
+            The only personal data processed is what users voluntarily provide through the Site's
+            contact form.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">8. Cookies</h2>
+          <p class="mt-3 leading-relaxed">
+            This Site does not use its own cookies. Microsoft Clarity, the behavioral analytics tool we
+            use, may store a technical or session cookie to distinguish anonymous visits; Umami
+            Analytics does not use cookies at all. Neither is used for advertising or cross-site
+            tracking.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

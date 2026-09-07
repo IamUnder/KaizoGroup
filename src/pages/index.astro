@@ -11,11 +11,15 @@ import FAQSection from '../components/FAQSection.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '../components/Analytics.astro';
 import { siteConfig } from '../lib/site';
+import { ui, resolveLang } from '../i18n/ui';
+
+const lang = resolveLang(Astro.currentLocale);
+const t = ui[lang];
 ---
 
 <BaseLayout
   title={`${siteConfig.name} — Desarrollo de software a medida en Puertollano y Ciudad Real`}
-  description="Desarrollo de software a medida, aplicaciones y páginas web en Puertollano, Ciudad Real y la comarca — con clientes en toda España. Auditoría gratuita sin compromiso."
+  description={t.meta.description}
 >
   <Header />
   <main id="main-content">
