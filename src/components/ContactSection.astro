@@ -30,11 +30,24 @@ const t = ui[lang].contact;
       id="contact-form"
       class="reveal rounded-lg border border-hairline bg-surface-card p-6 sm:p-8"
       data-i18n-status={JSON.stringify(t.status)}
+      data-lang={lang}
       novalidate
     >
       <input
         type="checkbox"
         name="botcheck"
+        class="hidden"
+        style="display:none"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+      />
+
+      <!-- Honeypot para el endpoint de leads de Portledger (distinto del "botcheck" de arriba,
+           que es el que espera Web3Forms) — debe quedar siempre vacío en un envío real. -->
+      <input
+        type="text"
+        name="website"
         class="hidden"
         style="display:none"
         tabindex="-1"
@@ -137,6 +150,27 @@ const t = ui[lang].contact;
     const formData = new FormData(form);
     formData.append('access_key', accessKey);
     formData.append('subject', `Nuevo contacto desde la web — ${formData.get('name')}`);
+
+    // Portledger (CRM interno): crea Cliente+Tarea a partir del mismo lead, en paralelo al envío
+    // por email. Best-effort a propósito — si falla o no está configurado, no afecta al envío
+    // del formulario, que sigue dependiendo únicamente de Web3Forms para la confirmación al usuario.
+    const portledgerUrl = import.meta.env.PUBLIC_PORTLEDGER_LEADS_URL as string | undefined;
+    const portledgerKey = import.meta.env.PUBLIC_PORTLEDGER_LEADS_KEY as string | undefined;
+    if (portledgerUrl && portledgerKey) {
+      fetch(portledgerUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Api-Key': portledgerKey },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          business: formData.get('business') || undefined,
+          message: formData.get('message'),
+          source: 'kaizogroup-web',
+          locale: form.dataset.lang || 'es',
+          website: formData.get('website') || '',
+        }),
+      }).catch(() => {});
+    }
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
