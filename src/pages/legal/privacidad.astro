@@ -20,9 +20,9 @@ import { siteConfig } from '../../lib/site';
         <section>
           <h2 class="font-display text-lg font-600 text-ink">1. Responsable del tratamiento</h2>
           <ul class="mt-3 list-inside list-disc space-y-1 leading-relaxed">
-            <li>Responsable: [Nombre completo o razón social del titular]</li>
-            <li>NIF/CIF: [NIF o CIF]</li>
-            <li>Domicilio: [Dirección fiscal completa]</li>
+            <li>Responsable: {siteConfig.legal.titular}</li>
+            <li>NIF: {siteConfig.legal.nif}</li>
+            <li>Domicilio: {siteConfig.legal.domicilio}</li>
             <li>Email: {siteConfig.contact.email}</li>
           </ul>
         </section>

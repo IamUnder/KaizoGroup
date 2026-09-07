@@ -1,40 +1,24 @@
 ---
-const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN as string | undefined;
+const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID as string | undefined;
+const umamiSrc =
+  (import.meta.env.PUBLIC_UMAMI_SRC as string | undefined) || 'https://cloud.umami.is/script.js';
 const clarityId = import.meta.env.PUBLIC_CLARITY_ID as string | undefined;
 ---
 
 {
-  plausibleDomain && (
-    <script
-      is:inline
-      defer
-      data-domain={plausibleDomain}
-      event-name-props="true"
-      src="https://plausible.io/js/script.tagged-events.js"
-    />
-  )
-}
-
-{
-  plausibleDomain && (
-    <script is:inline>
-      window.plausible =
-        window.plausible ||
-        function () {
-          (window.plausible.q = window.plausible.q || []).push(arguments);
-        };
-    </script>
+  umamiWebsiteId && (
+    <script is:inline defer src={umamiSrc} data-website-id={umamiWebsiteId} />
   )
 }
 
 <script>
-  // Delega clics en cualquier elemento con data-analytics-event a Plausible,
+  // Delega clics en cualquier elemento con data-analytics-event a Umami,
   // y escucha el evento custom que dispara el formulario de contacto al enviarse con éxito.
   const track = (eventName: string, props?: Record<string, string>) => {
-    // @ts-expect-error — plausible se inyecta globalmente solo si PUBLIC_PLAUSIBLE_DOMAIN está definido
-    if (typeof window.plausible === 'function') {
+    // @ts-expect-error — umami se inyecta globalmente solo si PUBLIC_UMAMI_WEBSITE_ID está definido
+    if (typeof window.umami?.track === 'function') {
       // @ts-expect-error
-      window.plausible(eventName, props ? { props } : undefined);
+      window.umami.track(eventName, props);
     }
   };
 

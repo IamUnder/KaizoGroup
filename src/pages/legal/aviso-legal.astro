@@ -25,10 +25,10 @@ import { siteConfig } from '../../lib/site';
             (LSSI-CE), se ponen a disposición los siguientes datos:
           </p>
           <ul class="mt-3 list-inside list-disc space-y-1 leading-relaxed">
-            <li>Titular: [Nombre completo o razón social del titular]</li>
-            <li>NIF/CIF: [NIF o CIF]</li>
+            <li>Titular: {siteConfig.legal.titular}</li>
+            <li>NIF: {siteConfig.legal.nif}</li>
             <li>Nombre comercial: {siteConfig.name}</li>
-            <li>Domicilio: [Dirección fiscal completa]</li>
+            <li>Domicilio: {siteConfig.legal.domicilio}</li>
             <li>Email de contacto: {siteConfig.contact.email}</li>
             <li>Teléfono: {siteConfig.contact.phone}</li>
           </ul>

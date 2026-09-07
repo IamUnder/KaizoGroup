@@ -3,9 +3,7 @@ export const siteConfig = {
   tagline: 'Estudio de diseño y desarrollo de software',
   description:
     'KaizoGroup diseña y desarrolla software a medida y webs de alto rendimiento para negocios de Puertollano, Ciudad Real y el resto de España que quieren dejar de perder clientes por una mala presencia digital.',
-  // TODO: cambiar a 'https://kaizogroup.es' junto con `site` en astro.config.mjs en cuanto el
-  // dominio esté comprado — debe ser siempre la URL donde el sitio está realmente servido.
-  url: 'https://test.kaizenfit.es',
+  url: 'https://kaizogroup.es', // sincronizado con `site` en astro.config.mjs
   locale: 'es-ES',
   // Puertollano/comarca y Ciudad Real como mercado local prioritario (SEO local), España como alcance general
   serviceArea: ['Puertollano', 'Almodóvar del Campo', 'Argamasilla de Calatrava', 'Ciudad Real', 'España'],
@@ -23,6 +21,12 @@ export const siteConfig = {
     phone: '+34 693 834 114',
     calendlyUrl: 'https://calendly.com/jorgeolmo-i/30min',
     googleBusinessUrl: '', // ficha aún no creada
+  },
+  // Datos para Aviso Legal / Privacidad (titular persona física, autónomo)
+  legal: {
+    titular: 'Jorge Olmo Villa',
+    nif: '05983784N',
+    domicilio: 'Calle Alcántara, 14, Puertollano (Ciudad Real)',
   },
   social: {
     linkedin: '', // TODO
