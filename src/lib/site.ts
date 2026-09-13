@@ -18,7 +18,7 @@ export const siteConfig = {
   social: {
     linkedin: 'https://www.linkedin.com/in/iamunder/',
     github: '', // TODO
-    instagram: '', // TODO
+    instagram: 'https://www.instagram.com/kaizo.group/',
     x: '', // TODO
   },
 } as const;
