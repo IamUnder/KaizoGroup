@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import AboutSection from '../components/AboutSection.astro';
 import ProblemSection from '../components/ProblemSection.astro';
 import SolutionSection from '../components/SolutionSection.astro';
 import Portfolio from '../components/Portfolio.astro';
@@ -10,7 +11,6 @@ import ContactSection from '../components/ContactSection.astro';
 import FAQSection from '../components/FAQSection.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '../components/Analytics.astro';
-import { siteConfig } from '../lib/site';
 import { ui, resolveLang } from '../i18n/ui';
 
 const lang = resolveLang(Astro.currentLocale);
@@ -18,12 +18,13 @@ const t = ui[lang];
 ---
 
 <BaseLayout
-  title={`${siteConfig.name} — Desarrollo de software a medida en Puertollano y Ciudad Real`}
+  title="Software a medida en Puertollano y Ciudad Real | KaizoGroup"
   description={t.meta.description}
 >
   <Header />
   <main id="main-content">
     <Hero />
+    <AboutSection />
     <ProblemSection />
     <SolutionSection />
     <Portfolio />

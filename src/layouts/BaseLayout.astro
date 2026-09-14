@@ -39,33 +39,61 @@ const enPath = lang === 'en' ? Astro.url.pathname : altPath ?? defaultAltPath;
 const esURL = new URL(esPath, Astro.site);
 const enURL = new URL(enPath, Astro.site);
 
-const localBusinessSchema = {
+// Perfiles reales con URL (evita listar redes vacías en sameAs)
+const sameAs = Object.values(siteConfig.social).filter(Boolean);
+
+const organizationId = `${siteConfig.url}/#organization`;
+const websiteId = `${siteConfig.url}/#website`;
+
+const graphSchema = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: siteConfig.name,
-  description,
-  url: siteConfig.url,
-  inLanguage: lang,
-  areaServed: siteConfig.serviceArea.map((area) => ({ '@type': 'City', name: area })),
-  email: siteConfig.contact.email,
-  telephone: siteConfig.contact.phone,
-  image: ogImageURL.toString(),
-  knowsAbout:
-    lang === 'es'
-      ? ['Desarrollo de software a medida', 'Diseño y desarrollo web', 'SEO técnico', 'Mantenimiento de aplicaciones']
-      : ['Custom software development', 'Web design and development', 'Technical SEO', 'Application maintenance'],
-  makesOffer:
-    lang === 'es'
-      ? [
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desarrollo de software a medida' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diseño y desarrollo web' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mantenimiento y soporte de aplicaciones' } },
-        ]
-      : [
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom software development' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web design and development' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Application maintenance and support' } },
-        ],
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': organizationId,
+      name: siteConfig.name,
+      description,
+      url: siteConfig.url,
+      inLanguage: lang,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Calle Alcántara, 14',
+        addressLocality: 'Puertollano',
+        addressRegion: 'Ciudad Real',
+        addressCountry: 'ES',
+      },
+      areaServed: siteConfig.serviceArea.map((area) => ({ '@type': 'City', name: area })),
+      about: siteConfig.serviceArea.map((area) => ({ '@type': 'Place', name: area })),
+      email: siteConfig.contact.email,
+      telephone: siteConfig.contact.phone,
+      image: ogImageURL.toString(),
+      ...(sameAs.length > 0 && { sameAs }),
+      knowsAbout:
+        lang === 'es'
+          ? ['Desarrollo de software a medida', 'Diseño y desarrollo web', 'SEO técnico', 'Mantenimiento de aplicaciones']
+          : ['Custom software development', 'Web design and development', 'Technical SEO', 'Application maintenance'],
+      makesOffer:
+        lang === 'es'
+          ? [
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desarrollo de software a medida' } },
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diseño y desarrollo web' } },
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mantenimiento y soporte de aplicaciones' } },
+            ]
+          : [
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom software development' } },
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web design and development' } },
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Application maintenance and support' } },
+            ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: siteConfig.url,
+      name: siteConfig.name,
+      inLanguage: lang,
+      publisher: { '@id': organizationId },
+    },
+  ],
 };
 ---
 
@@ -103,7 +131,7 @@ const localBusinessSchema = {
 
     {
       includeLocalBusinessSchema && (
-        <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} is:inline />
+        <script type="application/ld+json" set:html={JSON.stringify(graphSchema)} is:inline />
       )
     }
 

@@ -30,7 +30,7 @@ const langSwitchHref = altPath ?? getRelativeLocaleUrl(otherLang, mirroredPath);
       <span class="font-display text-lg font-600 tracking-tight text-ink">{siteConfig.name}</span>
     </a>
 
-    <nav aria-label={t.header.navAriaLabel} class="hidden items-center gap-8 md:flex">
+    <nav aria-label={t.header.navAriaLabel} class="hidden items-center gap-6 lg:flex">
       {
         t.nav.map((item) => (
           <a href={item.href} class="font-body text-sm text-body transition-colors hover:text-ink">
@@ -49,7 +49,7 @@ const langSwitchHref = altPath ?? getRelativeLocaleUrl(otherLang, mirroredPath);
       </a>
 
       <!-- Menú móvil sin JS: <details>/<summary> nativo -->
-      <details class="relative md:hidden">
+      <details class="relative lg:hidden">
         <summary
           class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-sm border border-hairline text-ink [&::-webkit-details-marker]:hidden"
           aria-label={t.header.openMenuAriaLabel}

@@ -105,22 +105,22 @@ const es: ContentSet = {
     },
     {
       step: '02',
-      title: 'Propuesta',
+      title: 'Propuesta de alcance y presupuesto',
       body: 'Alcance y presupuesto ajustados a tus necesidades reales, no una cifra de catálogo que se queda corta o se queda larga.',
     },
     {
       step: '03',
-      title: 'Desarrollo',
+      title: 'Desarrollo en iteraciones cortas',
       body: 'Iteraciones cortas con entregas visibles, para que veas avances desde la primera semana, no al final del proyecto.',
     },
     {
       step: '04',
-      title: 'Lanzamiento',
+      title: 'Lanzamiento y verificación',
       body: 'Desplegamos, verificamos en producción y nos aseguramos de que todo funciona antes de darlo por cerrado.',
     },
     {
       step: '05',
-      title: 'Acompañamiento',
+      title: 'Acompañamiento tras el lanzamiento',
       body: 'Seguimos a tu lado después del lanzamiento — dudas, ajustes o nuevas necesidades, resueltas sin fricción.',
     },
   ],
@@ -234,22 +234,22 @@ const en: ContentSet = {
     },
     {
       step: '02',
-      title: 'Proposal',
+      title: 'Scope and budget proposal',
       body: "Scope and budget tailored to your actual needs, not a catalog price that ends up too small or too big.",
     },
     {
       step: '03',
-      title: 'Development',
+      title: 'Development in short iterations',
       body: 'Short iterations with visible progress, so you see results from the first week, not just at the end of the project.',
     },
     {
       step: '04',
-      title: 'Launch',
+      title: 'Launch and verification',
       body: 'We deploy, verify everything in production, and make sure it all works before calling it done.',
     },
     {
       step: '05',
-      title: 'Ongoing support',
+      title: 'Support after launch',
       body: "We stay by your side after launch — questions, tweaks, or new needs, handled without friction.",
     },
   ],

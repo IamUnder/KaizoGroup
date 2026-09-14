@@ -5,9 +5,21 @@ const umamiSrc =
 const clarityId = import.meta.env.PUBLIC_CLARITY_ID as string | undefined;
 ---
 
+{umamiWebsiteId && <link rel="preconnect" href="https://cloud.umami.is" />}
+{clarityId && <link rel="preconnect" href="https://www.clarity.ms" />}
+
 {
   umamiWebsiteId && (
     <script is:inline defer src={umamiSrc} data-website-id={umamiWebsiteId} />
+  )
+}
+
+{
+  // Data island (no ejecutable, la CSP no la restringe) en vez de un script inline con el id
+  // horneado — así el bootstrap de Clarity puede vivir en el script procesado de abajo, que sí
+  // es un fichero externo 'self', sin necesitar 'unsafe-inline' en script-src.
+  clarityId && (
+    <script type="application/json" id="kz-clarity-config" set:html={JSON.stringify({ id: clarityId })} is:inline />
   )
 }
 
@@ -35,23 +47,28 @@ const clarityId = import.meta.env.PUBLIC_CLARITY_ID as string | undefined;
     const detail = (event as CustomEvent<{ event: string }>).detail;
     if (detail?.event) track(detail.event);
   });
-</script>
 
-{
-  clarityId && (
-    <script is:inline define:vars={{ clarityId }}>
-      (function (c, l, a, r, i, t, y) {
-        c[a] =
-          c[a] ||
-          function () {
-            (c[a].q = c[a].q || []).push(arguments);
-          };
-        t = l.createElement(r);
-        t.async = 1;
-        t.src = 'https://www.clarity.ms/tag/' + i;
-        y = l.getElementsByTagName(r)[0];
-        y.parentNode.insertBefore(t, y);
-      })(window, document, 'clarity', 'script', clarityId);
-    </script>
-  )
-}
+  // Clarity: lee el id desde el data island JSON de arriba (si existe) e inyecta su script.
+  const clarityConfig = document.getElementById('kz-clarity-config')?.textContent;
+  if (clarityConfig) {
+    try {
+      const { id } = JSON.parse(clarityConfig) as { id?: string };
+      if (id) {
+        (function (c: any, l: Document, a: string, r: string, i: string) {
+          c[a] =
+            c[a] ||
+            function () {
+              (c[a].q = c[a].q || []).push(arguments);
+            };
+          const t = l.createElement(r) as HTMLScriptElement;
+          t.async = true;
+          t.src = 'https://www.clarity.ms/tag/' + i;
+          const y = l.getElementsByTagName(r)[0];
+          y.parentNode?.insertBefore(t, y);
+        })(window, document, 'clarity', 'script', id);
+      }
+    } catch {
+      // JSON malformado — no debería pasar nunca, se genera con JSON.stringify en build time.
+    }
+  }
+</script>

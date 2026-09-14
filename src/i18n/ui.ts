@@ -43,6 +43,7 @@ export interface Dictionary {
     ctaSecondary: string;
     location: string;
   };
+  about: { eyebrow: string; h2: string; body: string };
   problem: { eyebrow: string; h2: string };
   solution: { eyebrow: string; h2: string };
   portfolio: { eyebrow: string; h2: string; imageAltPrefix: string };
@@ -85,7 +86,7 @@ export const ui: Record<Lang, Dictionary> = {
     meta: {
       tagline: 'Estudio de diseño y desarrollo de software',
       description:
-        'KaizoGroup diseña y desarrolla software a medida y webs de alto rendimiento para negocios de Puertollano, Ciudad Real y el resto de España que quieren dejar de perder clientes por una mala presencia digital.',
+        'Software a medida y webs de alto rendimiento en Puertollano y Ciudad Real. Deja de perder clientes por una mala presencia digital. Auditoría gratis.',
       keywords: [
         'desarrollo de software Puertollano',
         'desarrollo de software a medida',
@@ -99,9 +100,11 @@ export const ui: Record<Lang, Dictionary> = {
     skipToContent: 'Saltar al contenido principal',
     nav: [
       { label: 'Servicios', href: '#solucion' },
+      { label: 'Sobre nosotros', href: '#sobre-nosotros' },
       { label: 'Porfolio', href: '#porfolio' },
       { label: 'Proceso', href: '#proceso' },
       { label: 'FAQ', href: '#faq' },
+      { label: 'Contacto', href: '#contacto' },
     ],
     header: {
       homeAriaLabel: 'KaizoGroup — inicio',
@@ -119,6 +122,11 @@ export const ui: Record<Lang, Dictionary> = {
       ctaPrimary: 'Auditoría gratis',
       ctaSecondary: 'Ver mi trabajo',
       location: 'Puertollano y Ciudad Real — y en remoto para el resto de España',
+    },
+    about: {
+      eyebrow: 'Sobre nosotros',
+      h2: 'De dónde viene el nombre KaizoGroup',
+      body: 'En KaizoGroup no vendemos código, resolvemos problemas. El nombre viene de Kaizen, la filosofía japonesa de mejora continua — así trabajamos: escuchando primero, construyendo lo justo, y quedándonos al lado del cliente después de entregar el proyecto. Con base en Puertollano, trabajamos con negocios de Ciudad Real y, en remoto, de toda España.',
     },
     problem: {
       eyebrow: 'El problema',
@@ -183,7 +191,7 @@ export const ui: Record<Lang, Dictionary> = {
     meta: {
       tagline: 'Software design and development studio',
       description:
-        'KaizoGroup designs and builds custom software and high-performance websites for businesses in Puertollano, Ciudad Real, and across Spain that want to stop losing customers to a poor digital presence.',
+        'KaizoGroup builds custom software and high-performance websites for businesses in Puertollano and Ciudad Real, Spain. Free audit, no strings attached.',
       keywords: [
         'custom software development Spain',
         'bespoke software development Puertollano',
@@ -197,9 +205,11 @@ export const ui: Record<Lang, Dictionary> = {
     skipToContent: 'Skip to main content',
     nav: [
       { label: 'Services', href: '#solucion' },
+      { label: 'About us', href: '#sobre-nosotros' },
       { label: 'Portfolio', href: '#porfolio' },
       { label: 'Process', href: '#proceso' },
       { label: 'FAQ', href: '#faq' },
+      { label: 'Contact', href: '#contacto' },
     ],
     header: {
       homeAriaLabel: 'KaizoGroup — home',
@@ -217,6 +227,11 @@ export const ui: Record<Lang, Dictionary> = {
       ctaPrimary: 'Free audit',
       ctaSecondary: 'See my work',
       location: 'Puertollano and Ciudad Real, Spain — remote for the rest of the world',
+    },
+    about: {
+      eyebrow: 'About us',
+      h2: 'Where the name KaizoGroup comes from',
+      body: "At KaizoGroup we don't just write code, we solve problems. The name comes from Kaizen, the Japanese philosophy of continuous improvement — that's how we work: listening first, building only what's needed, and staying by the client's side after the project ships. Based in Puertollano, we work with businesses across Ciudad Real and, remotely, the rest of Spain.",
     },
     problem: {
       eyebrow: 'The problem',
