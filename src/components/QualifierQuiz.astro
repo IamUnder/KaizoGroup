@@ -1,5 +1,6 @@
 ---
 import { ui, resolveLang } from '../i18n/ui';
+import { siteConfig } from '../lib/site';
 
 const lang = resolveLang(Astro.currentLocale);
 const t = ui[lang].quiz;
@@ -19,9 +20,11 @@ const statusMessages = ui[lang].contact.status;
     <input type="hidden" name="message" id="quiz-message" />
 
     <div class="mb-8 flex gap-2" aria-hidden="true">
-      <div class="quiz-progress h-1 flex-1 rounded-full bg-surface-strong" data-progress="1"></div>
-      <div class="quiz-progress h-1 flex-1 rounded-full bg-surface-strong" data-progress="2"></div>
-      <div class="quiz-progress h-1 flex-1 rounded-full bg-surface-strong" data-progress="3"></div>
+      {
+        [1, 2, 3, 4, 5].map((n) => (
+          <div class="quiz-progress h-1 flex-1 rounded-full bg-surface-strong" data-progress={n} />
+        ))
+      }
     </div>
 
     <div data-step="1">
@@ -32,6 +35,7 @@ const statusMessages = ui[lang].contact.status;
             <button
               type="button"
               class="quiz-option rounded-md border border-hairline bg-surface-card p-4 text-left text-ink transition-colors hover:border-accent"
+              data-group="situation"
               data-value={option}
             >
               {option}
@@ -42,6 +46,63 @@ const statusMessages = ui[lang].contact.status;
     </div>
 
     <div data-step="2" class="hidden">
+      <h2 class="font-display text-2xl font-600 text-ink sm:text-3xl">{t.goalQuestion}</h2>
+      <div class="mt-6 grid gap-3">
+        {
+          t.goalOptions.map((option) => (
+            <button
+              type="button"
+              class="quiz-option rounded-md border border-hairline bg-surface-card p-4 text-left text-ink transition-colors hover:border-accent"
+              data-group="goal"
+              data-value={option}
+            >
+              {option}
+            </button>
+          ))
+        }
+      </div>
+      <button type="button" data-back class="mt-6 text-sm text-body-soft hover:text-ink">{t.backLabel}</button>
+    </div>
+
+    <div data-step="3" class="hidden">
+      <h2 class="font-display text-2xl font-600 text-ink sm:text-3xl">{t.timingQuestion}</h2>
+      <div class="mt-6 grid gap-3">
+        {
+          t.timingOptions.map((option) => (
+            <button
+              type="button"
+              class="quiz-option rounded-md border border-hairline bg-surface-card p-4 text-left text-ink transition-colors hover:border-accent"
+              data-group="timing"
+              data-value={option}
+            >
+              {option}
+            </button>
+          ))
+        }
+      </div>
+      <button type="button" data-back class="mt-6 text-sm text-body-soft hover:text-ink">{t.backLabel}</button>
+    </div>
+
+    <div data-step="4" class="hidden">
+      <h2 class="font-display text-2xl font-600 text-ink sm:text-3xl">{t.sectorQuestion}</h2>
+      <div class="mt-6 grid gap-3 sm:grid-cols-2">
+        {
+          t.sectorOptions.map((option) => (
+            <button
+              type="button"
+              class="quiz-option rounded-md border border-hairline bg-surface-card p-4 text-left text-ink transition-colors hover:border-accent"
+              data-group="sector"
+              data-value={option}
+            >
+              {option}
+            </button>
+          ))
+        }
+      </div>
+      <button type="button" data-back class="mt-6 text-sm text-body-soft hover:text-ink">{t.backLabel}</button>
+    </div>
+
+    <div data-step="5" class="hidden">
       <label for="quiz-business" class="block font-display text-2xl font-600 text-ink sm:text-3xl">
         {t.businessLabel}
       </label>
@@ -58,37 +119,67 @@ const statusMessages = ui[lang].contact.status;
       </div>
     </div>
 
-    <div data-step="3" class="hidden">
-      <h2 class="font-display text-2xl font-600 text-ink sm:text-3xl">{t.contactHeading}</h2>
-      <div class="mt-6 grid gap-4">
-        <div>
-          <label for="quiz-name" class="block text-sm font-500 text-ink">{t.nameLabel}</label>
-          <input
-            id="quiz-name"
-            name="name"
-            type="text"
-            required
-            autocomplete="name"
-            class="mt-2 w-full rounded-sm border-0 bg-surface-strong px-4 py-3 text-sm text-ink outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          />
-        </div>
-        <div>
-          <label for="quiz-email" class="block text-sm font-500 text-ink">{t.emailLabel}</label>
-          <input
-            id="quiz-email"
-            name="email"
-            type="email"
-            required
-            autocomplete="email"
-            class="mt-2 w-full rounded-sm border-0 bg-surface-strong px-4 py-3 text-sm text-ink outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          />
-        </div>
+    <div data-step="6" class="hidden">
+      <h2 class="font-display text-2xl font-600 text-ink sm:text-3xl">{t.resultsHeading}</h2>
+      <p class="mt-3 text-body">{t.resultsSubtitle}</p>
+
+      <div id="quiz-choices" class="mt-6 grid gap-4 sm:grid-cols-2">
+        <button
+          type="button"
+          id="quiz-choice-email"
+          class="quiz-choice-card rounded-md border border-hairline bg-surface-card p-5 text-left transition-colors hover:border-accent"
+        >
+          <span class="block font-display text-base font-600 text-ink">{t.emailChoiceLabel}</span>
+          <span class="mt-2 block text-sm text-body-soft">{t.emailChoiceDesc}</span>
+        </button>
+        <a
+          href={siteConfig.contact.calendlyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="quiz-choice-card rounded-md border border-hairline bg-surface-card p-5 text-left transition-colors hover:border-accent"
+          data-analytics-event="quiz_call_click"
+        >
+          <span class="block font-display text-base font-600 text-ink">{t.callChoiceLabel}</span>
+          <span class="mt-2 block text-sm text-body-soft">{t.callChoiceDesc}</span>
+        </a>
       </div>
-      <div class="mt-8 flex items-center justify-between gap-4">
-        <button type="button" data-back class="text-sm text-body-soft hover:text-ink">{t.backLabel}</button>
-        <button type="submit" class="btn-primary">{t.submitLabel}</button>
+
+      <div id="quiz-email-form" class="hidden mt-2">
+        <h3 class="font-display text-lg font-600 text-ink">{t.contactHeading}</h3>
+        <div class="mt-6 grid gap-4">
+          <div>
+            <label for="quiz-name" class="block text-sm font-500 text-ink">{t.nameLabel}</label>
+            <input
+              id="quiz-name"
+              name="name"
+              type="text"
+              required
+              autocomplete="name"
+              class="mt-2 w-full rounded-sm border-0 bg-surface-strong px-4 py-3 text-sm text-ink outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            />
+          </div>
+          <div>
+            <label for="quiz-email" class="block text-sm font-500 text-ink">{t.emailLabel}</label>
+            <input
+              id="quiz-email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              class="mt-2 w-full rounded-sm border-0 bg-surface-strong px-4 py-3 text-sm text-ink outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            />
+          </div>
+        </div>
+        <div class="mt-8 flex items-center justify-between gap-4">
+          <button type="button" id="quiz-back-to-choices" class="text-sm text-body-soft hover:text-ink">
+            {t.backToChoicesLabel}
+          </button>
+          <button type="submit" class="btn-primary">{t.submitLabel}</button>
+        </div>
+        <p id="quiz-status" class="mt-4 text-sm" role="status" aria-live="polite"></p>
       </div>
-      <p id="quiz-status" class="mt-4 text-sm" role="status" aria-live="polite"></p>
+
+      <button type="button" data-back class="mt-8 text-sm text-body-soft hover:text-ink">{t.backLabel}</button>
     </div>
   </form>
 </div>
@@ -107,27 +198,33 @@ const statusMessages = ui[lang].contact.status;
   const messageInput = document.getElementById('quiz-message') as HTMLInputElement | null;
   const businessInput = document.getElementById('quiz-business') as HTMLInputElement | null;
   const messagePrefix = form?.dataset.messagePrefix ?? '';
-  let selectedSituation = '';
+
+  const answers: Record<string, string> = { situation: '', goal: '', timing: '', sector: '' };
 
   const steps = [...document.querySelectorAll<HTMLElement>('[data-step]')];
   const progressDots = [...document.querySelectorAll<HTMLElement>('[data-progress]')];
 
   function goToStep(n: number) {
     steps.forEach((el) => el.classList.toggle('hidden', el.dataset.step !== String(n)));
-    progressDots.forEach((el) => el.classList.toggle('active', Number(el.dataset.progress) <= n));
+    const dotStep = Math.min(n, progressDots.length);
+    progressDots.forEach((el) => el.classList.toggle('active', Number(el.dataset.progress) <= dotStep));
     window.dispatchEvent(new CustomEvent('kz:analytics', { detail: { event: `quiz_step_${n}` } }));
   }
 
   document.querySelectorAll<HTMLElement>('.quiz-option').forEach((btn) => {
     btn.addEventListener('click', () => {
-      selectedSituation = btn.dataset.value ?? '';
-      document.querySelectorAll('.quiz-option').forEach((b) => b.classList.remove('border-accent'));
+      const group = btn.dataset.group;
+      if (!group) return;
+      answers[group] = btn.dataset.value ?? '';
+      const container = btn.closest<HTMLElement>('[data-step]');
+      container?.querySelectorAll('.quiz-option').forEach((b) => b.classList.remove('border-accent'));
       btn.classList.add('border-accent');
-      goToStep(2);
+      const current = Number(container?.dataset.step ?? '1');
+      goToStep(current + 1);
     });
   });
 
-  document.querySelectorAll('[data-next]').forEach((btn) => btn.addEventListener('click', () => goToStep(3)));
+  document.querySelectorAll('[data-next]').forEach((btn) => btn.addEventListener('click', () => goToStep(6)));
   document.querySelectorAll('[data-back]').forEach((btn) =>
     btn.addEventListener('click', () => {
       const current = steps.find((el) => !el.classList.contains('hidden'));
@@ -136,6 +233,18 @@ const statusMessages = ui[lang].contact.status;
     })
   );
 
+  const choicesEl = document.getElementById('quiz-choices');
+  const emailFormEl = document.getElementById('quiz-email-form');
+  document.getElementById('quiz-choice-email')?.addEventListener('click', () => {
+    choicesEl?.classList.add('hidden');
+    emailFormEl?.classList.remove('hidden');
+    window.dispatchEvent(new CustomEvent('kz:analytics', { detail: { event: 'quiz_email_choice' } }));
+  });
+  document.getElementById('quiz-back-to-choices')?.addEventListener('click', () => {
+    emailFormEl?.classList.add('hidden');
+    choicesEl?.classList.remove('hidden');
+  });
+
   if (form) {
     // Este listener debe registrarse ANTES de initLeadForm: los listeners de "submit" sobre el
     // mismo elemento se ejecutan en orden de registro, y initLeadForm lee el FormData de forma
@@ -143,7 +252,13 @@ const statusMessages = ui[lang].contact.status;
     form.addEventListener('submit', () => {
       if (messageInput) {
         const business = businessInput?.value.trim();
-        messageInput.value = `${messagePrefix}${selectedSituation}.${business ? ' Negocio: ' + business + '.' : ''}`;
+        const parts = [
+          `Situación: ${answers.situation}`,
+          `Objetivo: ${answers.goal}`,
+          `Plazo: ${answers.timing}`,
+          `Sector: ${answers.sector}`,
+        ];
+        messageInput.value = `${messagePrefix} — ${parts.join('. ')}.${business ? ' Negocio: ' + business + '.' : ''}`;
       }
     });
 

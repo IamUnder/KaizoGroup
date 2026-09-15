@@ -125,5 +125,10 @@ const t = ui[lang].contact;
 
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const status = document.getElementById('contact-form-status');
-  if (form) initLeadForm(form, status, { source: form.dataset.source });
+  // Si se llega desde un artículo del blog (?ref=slug-del-post, ver src/pages/blog/
+  // [slug].astro), se añade al "source" para poder distinguir en Portledger qué post
+  // trajo el lead — la página en sí sigue siendo estática, esto se resuelve en cliente.
+  const ref = new URLSearchParams(location.search).get('ref');
+  const source = ref ? `${form?.dataset.source ?? 'kaizogroup-web'}-blog-${ref}` : form?.dataset.source;
+  if (form) initLeadForm(form, status, { source });
 </script>

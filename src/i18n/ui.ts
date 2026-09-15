@@ -94,14 +94,27 @@ export interface Dictionary {
     subtitle: string;
     situationQuestion: string;
     situationOptions: string[];
+    goalQuestion: string;
+    goalOptions: string[];
+    timingQuestion: string;
+    timingOptions: string[];
+    sectorQuestion: string;
+    sectorOptions: string[];
     businessLabel: string;
     businessPlaceholder: string;
+    resultsHeading: string;
+    resultsSubtitle: string;
+    emailChoiceLabel: string;
+    emailChoiceDesc: string;
+    callChoiceLabel: string;
+    callChoiceDesc: string;
     contactHeading: string;
     nameLabel: string;
     emailLabel: string;
     submitLabel: string;
     backLabel: string;
     nextLabel: string;
+    backToChoicesLabel: string;
     messagePrefix: string;
   };
   heroQuizTeaser: string;
@@ -235,9 +248,9 @@ export const ui: Record<Lang, Dictionary> = {
     },
     quiz: {
       eyebrow: '¿Podemos ayudarte?',
-      h1: 'Cuéntanos qué necesitas en 3 pasos',
+      h1: 'Cuéntanos qué necesita tu negocio',
       subtitle:
-        'Sin compromiso — al final te decimos cómo te ayudaríamos, y puedes pedirnos que te contactemos.',
+        'Unas pocas preguntas rápidas — al final eliges si prefieres que te escribamos o agendar una llamada directamente.',
       situationQuestion: '¿Qué tienes ahora mismo?',
       situationOptions: [
         'No tengo página web',
@@ -245,15 +258,33 @@ export const ui: Record<Lang, Dictionary> = {
         'Tengo web y funciona bien, busco otra cosa',
         'Busco una herramienta para gestionar mi negocio',
       ],
+      goalQuestion: '¿Cuál es tu objetivo principal ahora mismo?',
+      goalOptions: [
+        'Conseguir más clientes',
+        'Ahorrar tiempo en tareas del día a día',
+        'Modernizar la imagen de mi negocio',
+        'Aún no lo tengo claro',
+      ],
+      timingQuestion: '¿Para cuándo te gustaría tenerlo en marcha?',
+      timingOptions: ['Lo antes posible', 'En 1-2 meses', 'Sin prisa, de momento solo miro opciones'],
+      sectorQuestion: '¿A qué se dedica tu negocio?',
+      sectorOptions: ['Taller', 'Peluquería o estética', 'Clínica o salud', 'Tienda o comercio', 'Inmobiliaria', 'Otro'],
       businessLabel: 'Nombre de tu negocio (opcional)',
       businessPlaceholder: 'Ej. Peluquería Ana',
-      contactHeading: 'Ya casi está — ¿cómo te contactamos?',
+      resultsHeading: '¡Listo! ¿Cómo prefieres que sigamos?',
+      resultsSubtitle: 'Con esto ya tenemos una idea clara de tu situación — tú eliges cómo continuar.',
+      emailChoiceLabel: 'Escríbenos un mensaje',
+      emailChoiceDesc: 'Te contestamos por email en menos de 24 horas.',
+      callChoiceLabel: 'Agenda una llamada de 30 min',
+      callChoiceDesc: 'Elige el hueco que mejor te venga, sin esperar a que te contestemos.',
+      contactHeading: 'Perfecto — ¿cómo te contactamos?',
       nameLabel: 'Nombre',
       emailLabel: 'Email',
       submitLabel: 'Enviar',
       backLabel: '← Atrás',
       nextLabel: 'Siguiente →',
-      messagePrefix: 'Cuestionario "¿Podemos ayudarte?" — Situación: ',
+      backToChoicesLabel: '← Elegir otra opción',
+      messagePrefix: 'Cuestionario "¿Podemos ayudarte?"',
     },
     heroQuizTeaser: '¿No sabes por dónde empezar? Haz el test',
   },
@@ -384,9 +415,9 @@ export const ui: Record<Lang, Dictionary> = {
     },
     quiz: {
       eyebrow: 'Can we help you?',
-      h1: 'Tell us what you need in 3 steps',
+      h1: 'Tell us what your business needs',
       subtitle:
-        "No strings attached — at the end we'll tell you how we'd help, and you can ask us to reach out.",
+        "A few quick questions — at the end you choose whether you'd rather we email you or book a call directly.",
       situationQuestion: 'What do you have right now?',
       situationOptions: [
         "I don't have a website",
@@ -394,15 +425,33 @@ export const ui: Record<Lang, Dictionary> = {
         'I have a website that works well, I need something else',
         "I'm looking for a tool to manage my business",
       ],
+      goalQuestion: 'What is your main goal right now?',
+      goalOptions: [
+        'Getting more customers',
+        'Saving time on day-to-day tasks',
+        'Modernizing my business image',
+        "I'm not sure yet",
+      ],
+      timingQuestion: 'When would you like it up and running?',
+      timingOptions: ['As soon as possible', 'In 1-2 months', "No rush, just looking around"],
+      sectorQuestion: 'What does your business do?',
+      sectorOptions: ['Workshop', 'Hair salon or beauty', 'Clinic or health', 'Shop or retail', 'Real estate', 'Other'],
       businessLabel: 'Your business name (optional)',
       businessPlaceholder: "E.g. Ana's Hair Salon",
-      contactHeading: 'Almost there — how should we reach you?',
+      resultsHeading: "All set! How would you like to continue?",
+      resultsSubtitle: "That gives us a clear picture of your situation — you choose how to move forward.",
+      emailChoiceLabel: 'Send us a message',
+      emailChoiceDesc: "We'll reply by email in under 24 hours.",
+      callChoiceLabel: 'Book a 30-min call',
+      callChoiceDesc: 'Pick the slot that works best for you, no waiting on a reply.',
+      contactHeading: 'Great — how should we reach you?',
       nameLabel: 'Name',
       emailLabel: 'Email',
       submitLabel: 'Send',
       backLabel: '← Back',
       nextLabel: 'Next →',
-      messagePrefix: 'Quiz "Can we help you?" — Situation: ',
+      backToChoicesLabel: '← Choose a different option',
+      messagePrefix: 'Quiz "Can we help you?"',
     },
     heroQuizTeaser: 'Not sure where to start? Take the quiz',
   },

@@ -28,6 +28,9 @@ const isHome = mirroredPath === '/';
 const homePath = lang === 'en' ? '/en' : '';
 const logoHref = isHome ? '#main-content' : homePath || '/';
 const sectionHref = (hash: string) => (isHome ? hash : `${homePath}/${hash}`);
+// El blog es una página real (no un ancla de la home) — su href es siempre absoluto,
+// nunca pasa por sectionHref.
+const blogHref = homePath ? `${homePath}/blog` : '/blog';
 ---
 
 <header class="sticky top-0 z-40 border-b border-hairline bg-canvas-deep/90 backdrop-blur">
@@ -45,6 +48,9 @@ const sectionHref = (hash: string) => (isHome ? hash : `${homePath}/${hash}`);
           </a>
         ))
       }
+      <a href={blogHref} class="font-body text-sm text-body transition-colors hover:text-ink">
+        Blog
+      </a>
       <a href={langSwitchHref} class="font-mono text-xs uppercase tracking-[0.1em] text-body-soft transition-colors hover:text-ink">
         {t.langSwitch.label}
       </a>
@@ -74,6 +80,9 @@ const sectionHref = (hash: string) => (isHome ? hash : `${homePath}/${hash}`);
               </a>
             ))
           }
+          <a href={blogHref} class="rounded-sm px-3 py-2 text-sm text-body hover:bg-surface-card-elevated hover:text-ink">
+            Blog
+          </a>
           <a href={langSwitchHref} class="rounded-sm px-3 py-2 font-mono text-xs uppercase tracking-[0.1em] text-body-soft hover:bg-surface-card-elevated hover:text-ink">
             {t.langSwitch.label}
           </a>

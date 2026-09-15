@@ -145,6 +145,64 @@
     transform: translateY(-1px);
   }
 
+  /* Tipografía del cuerpo de un artículo del blog (Markdown renderizado, ver
+     src/pages/blog/[slug].astro) — sin plugin de "prose", solo lo que hace falta para
+     que un artículo largo se lea bien con la misma paleta del resto del sitio. */
+  .article-body h2 {
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .article-body h3 {
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .article-body p {
+    margin-top: 1rem;
+    line-height: 1.7;
+    color: var(--color-body);
+  }
+
+  .article-body ul,
+  .article-body ol {
+    margin-top: 1rem;
+    padding-left: 1.25rem;
+    color: var(--color-body);
+  }
+
+  .article-body ul {
+    list-style: disc;
+  }
+
+  .article-body ol {
+    list-style: decimal;
+  }
+
+  .article-body li {
+    margin-top: 0.4rem;
+    line-height: 1.65;
+  }
+
+  .article-body strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .article-body a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   .reveal {
     opacity: 0;
     transform: translateY(12px);

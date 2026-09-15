@@ -1,10 +1,14 @@
 import type { APIRoute } from 'astro';
+import { getCollection } from 'astro:content';
 import { siteConfig } from '../lib/site';
 import { getContent } from '../data/content';
 
-export const GET: APIRoute = ({ site }) => {
+export const GET: APIRoute = async ({ site }) => {
   const base = (site?.toString() ?? siteConfig.url).replace(/\/$/, '');
   const es = getContent('es');
+  const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+  );
 
   const lines = [
     `# ${siteConfig.name}`,
@@ -26,6 +30,10 @@ export const GET: APIRoute = ({ site }) => {
     '',
     '## Porfolio',
     ...es.portfolio.map((p) => `- ${p.name}${p.status ? ` (${p.status})` : ''}: ${p.description}`),
+    '',
+    '## Blog',
+    `Guías prácticas para gestionar un negocio (talleres, peluquerías, clínicas, tiendas, inmobiliarias) — ver ${base}/blog/`,
+    ...posts.map((p) => `- [${p.data.title}](${base}/blog/${p.id}/): ${p.data.quickAnswer}`),
     '',
     '## Preguntas frecuentes',
     ...es.faqs.map((f) => `- ${f.question} ${f.answer}`),
