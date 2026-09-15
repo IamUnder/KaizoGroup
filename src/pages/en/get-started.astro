@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Analytics from '../../components/Analytics.astro';
+import QualifierQuiz from '../../components/QualifierQuiz.astro';
+import { ui, resolveLang } from '../../i18n/ui';
+
+const lang = resolveLang(Astro.currentLocale);
+const t = ui[lang].quiz;
+const altPath = '/empezar/';
+---
+
+<BaseLayout
+  title="Can we help you? | KaizoGroup"
+  description="Tell us in 3 steps what your business needs and we'll tell you how we'd help — no strings attached."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content">
+    <section class="section-kz border-b border-hairline bg-canvas-deep">
+      <div class="container-kz">
+        <div class="reveal mx-auto max-w-xl text-center">
+          <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">{t.eyebrow}</p>
+          <h1 class="mt-3 font-display text-3xl font-600 text-ink sm:text-4xl">{t.h1}</h1>
+          <p class="mt-4 text-body">{t.subtitle}</p>
+        </div>
+
+        <div class="mt-12">
+          <QualifierQuiz />
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <Analytics slot="head" />
+</BaseLayout>

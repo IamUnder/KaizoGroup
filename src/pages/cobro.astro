@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const altPath = '/en/billing/';
+
+const faqs = [
+  {
+    q: '¿Cuánto cuesta un proyecto?',
+    a: 'Depende de las necesidades de cada cliente. No trabajamos con presupuestos cerrados de catálogo — cada proyecto se valora según su alcance real, para que no pagues de más ni te quedes corto de funcionalidad.',
+  },
+  {
+    q: '¿Cuándo se paga?',
+    a: 'El pago se divide en dos partes: una señal al aprobar el presupuesto (habitualmente un 30%) y el resto al entregar el proyecto (70%) — el reparto exacto se ajusta a las necesidades de cada cliente.',
+  },
+  {
+    q: '¿Y en proyectos más grandes?',
+    a: 'Se paga por fases: una parte al aprobar el presupuesto, otra al entregar el MVP, y el resto conforme se van cerrando las siguientes fases acordadas — así el pago avanza al mismo ritmo que el proyecto.',
+  },
+  {
+    q: '¿Emitís factura?',
+    a: 'Sí, factura con IVA conforme a la normativa española, ligada a cada presupuesto aceptado.',
+  },
+  {
+    q: '¿Firmáis contrato?',
+    a: 'Sí. Al aprobar el presupuesto se firma un contrato que cubre la propiedad del código entregado, la confidencialidad y el resto de aspectos legales según el tipo de proyecto — no es lo mismo un desarrollo a medida para un cliente que un desarrollo sobre un producto propio como Nexo, así que el contrato se adapta a cada caso.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="Cómo funciona el cobro | KaizoGroup"
+  description="Cómo calculamos el presupuesto, cuándo se paga y qué incluye cada fase de un proyecto con KaizoGroup — sin sorpresas ni letra pequeña."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content" class="section-kz">
+    <div class="container-kz max-w-2xl">
+      <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">Precios y pagos</p>
+      <h1 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">Cómo funciona el cobro</h1>
+      <p class="mt-6 text-body leading-relaxed">
+        No trabajamos con un catálogo de precios cerrado. Cada negocio tiene necesidades
+        distintas, y un precio de catálogo casi siempre se queda corto para unos y largo para
+        otros. Preferimos entender primero qué necesitas de verdad, y a partir de ahí darte un
+        presupuesto ajustado a ese alcance concreto.
+      </p>
+
+      <div class="mt-10 space-y-8 text-body">
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">Cómo se calcula el presupuesto</h2>
+          <p class="mt-3 leading-relaxed">
+            Tras la primera conversación, te mandamos una propuesta con el alcance, los plazos y
+            el precio cerrado para ese alcance — nada de horas sueltas ni sorpresas a mitad de
+            proyecto. Si durante el desarrollo surge algo fuera de lo pactado, te lo decimos antes
+            de tocarlo, con su coste, para que decidas si sigue adelante.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">Cómo se paga</h2>
+          <p class="mt-3 leading-relaxed">
+            En proyectos estándar, el pago se divide en dos partes: una señal al aprobar el
+            presupuesto (habitualmente un 30%) y el resto al entregar (70%) — el reparto exacto
+            se ajusta a cada cliente. En proyectos más grandes, el pago avanza por fases: una
+            parte al aprobar el presupuesto, otra al entregar el MVP, y el resto conforme se
+            cierran las siguientes fases acordadas.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">Facturación</h2>
+          <p class="mt-3 leading-relaxed">
+            Emitimos factura con IVA por cada presupuesto aceptado, conforme a la normativa
+            española. Si el proyecto incluye mantenimiento mensual, la facturación de esas horas
+            va aparte, con su propia periodicidad.
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-12 divide-y divide-hairline border-t border-b border-hairline">
+        {
+          faqs.map((item) => (
+            <details class="group py-5">
+              <summary class="cursor-pointer list-none font-display text-base font-600 text-ink [&::-webkit-details-marker]:hidden">
+                {item.q}
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-body">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+
+      <p class="mt-10 text-body">
+        ¿Tienes una duda que no está aquí?{' '}
+        <a href="/dudas" class="text-ink underline underline-offset-2">Ver todas las preguntas</a>
+        {' '}o{' '}
+        <a href="/#contacto" class="text-ink underline underline-offset-2">pide tu auditoría gratuita</a>.
+      </p>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline slot="head" />
+  <Footer />
+</BaseLayout>

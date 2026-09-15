@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Analytics from '../components/Analytics.astro';
+
+const altPath = '/en/nexo/';
+
+const modules = [
+  {
+    name: 'Contactos',
+    tagline: 'Toda tu cartera de clientes en un único sitio.',
+    bullets: [
+      'Empresas y personas, con historial de llamadas, emails, reuniones y notas.',
+      'Base compartida por el resto de módulos: facturas, citas, proyectos y ventas se enlazan al contacto.',
+    ],
+  },
+  {
+    name: 'Pipeline de ventas',
+    tagline: 'Sigue cada oportunidad hasta que se cierra.',
+    bullets: ['Tablero visual por etapas, arrastrar y soltar.', 'Valor total del negocio abierto de un vistazo.'],
+  },
+  {
+    name: 'Facturación',
+    tagline: 'Presupuestos y facturas sin fricción.',
+    bullets: [
+      'Convierte un presupuesto aceptado en factura con un clic.',
+      'Cobros parciales, notas de crédito y facturación recurrente.',
+      'Descarga en PDF o envío por email desde la propia ficha.',
+    ],
+  },
+  {
+    name: 'Citas',
+    tagline: 'Un calendario que se adapta a tu negocio.',
+    bullets: [
+      'Recursos configurables (personas, salas...) con su propia disponibilidad semanal.',
+      'Vista mes y semana, con aviso (no bloqueo) fuera de horario.',
+    ],
+  },
+  {
+    name: 'Tesorería',
+    tagline: 'Sabe cuánto dinero tienes, de verdad.',
+    bullets: ['Cuentas de caja y banco con saldo siempre actualizado.', 'Movimientos manuales para lo que no viene de una factura.'],
+  },
+  {
+    name: 'Conciliación bancaria',
+    tagline: 'Cuadra tu extracto en minutos, no horas.',
+    bullets: [
+      'Sube el CSV de tu banco y empareja automáticamente por importe y fecha.',
+      'Lo que no cuadra solo, se resuelve a mano en dos clics.',
+    ],
+  },
+  {
+    name: 'Inventario',
+    tagline: 'Stock bajo control, en uno o varios almacenes.',
+    bullets: [
+      'Entradas, salidas y transferencias entre almacenes.',
+      'Tan simple para una PYME con un almacén como potente para varios.',
+    ],
+  },
+  {
+    name: 'TPV',
+    tagline: 'Cobra en mostrador en segundos.',
+    bullets: ['Busca artículos del catálogo o añade líneas libres.', 'Descuenta stock y registra el ingreso automáticamente.'],
+  },
+  {
+    name: 'RRHH',
+    tagline: 'Historial completo de cada empleado.',
+    bullets: [
+      'Contratos con historial (no solo el vigente) y ausencias.',
+      'Aprobación de vacaciones y bajas desde una pantalla central.',
+    ],
+  },
+  {
+    name: 'Nóminas',
+    tagline: 'Genera las nóminas del mes en un clic.',
+    bullets: [
+      'Cálculo automático a partir del contrato vigente de cada empleado.',
+      'Integración opcional con Tesorería al confirmar cada nómina.',
+    ],
+  },
+  {
+    name: 'Contabilidad',
+    tagline: 'Información limpia para tu gestoría.',
+    bullets: ['Se rellena sola desde facturas, tesorería y nóminas.', 'Resumen de ingresos, gastos y resultado por periodo.'],
+  },
+  {
+    name: 'Proyectos y Fabricación',
+    tagline: 'Gestiona servicios y producción con la misma herramienta.',
+    bullets: [
+      'Horas por proyecto, facturables a tu cliente con un botón.',
+      'Recetas y órdenes de producción que actualizan tu inventario solas.',
+    ],
+  },
+];
+
+const sectors = ['Talleres', 'Peluquerías', 'Clínicas', 'Tiendas', 'Inmobiliarias'];
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Nexo',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description:
+    'Nexo es un CRM/ERP modular multitenant para pymes: contactos, ventas, facturación, tesorería, inventario, TPV, RRHH, nóminas y contabilidad en una sola herramienta.',
+  featureList: modules.map((m) => m.name),
+  offers: { '@type': 'Offer', availability: 'https://schema.org/InStock' },
+};
+---
+
+<BaseLayout
+  title="Nexo — CRM/ERP modular para pymes | KaizoGroup"
+  description="Nexo es el CRM/ERP modular que KaizoGroup ha construido para pymes: contactos, ventas, facturación, inventario, TPV, RRHH y más — paga solo por lo que usas."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content">
+    <section class="section-kz border-b border-hairline bg-canvas-deep">
+      <div class="container-kz">
+        <div class="reveal max-w-2xl">
+          <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">Producto propio de KaizoGroup</p>
+          <h1 class="mt-3 font-display text-4xl font-600 text-ink sm:text-5xl">
+            Nexo: el CRM/ERP que se adapta a tu negocio
+          </h1>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-body">
+            Un único sistema modular para gestionar clientes, ventas, facturación, inventario y
+            más — sin pagar por módulos que no vas a usar y sin depender de diez herramientas
+            sueltas que no se hablan entre sí.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-2">
+            {
+              sectors.map((sector) => (
+                <span class="rounded-full border border-hairline px-3 py-1 font-mono text-xs text-body-soft">
+                  {sector}
+                </span>
+              ))
+            }
+          </div>
+          <div class="mt-9">
+            <a href="#contacto" class="btn-primary">Pide una demo</a>
+          </div>
+        </div>
+
+        <div class="reveal mt-12 overflow-hidden rounded-lg border border-hairline">
+          <img
+            src="/portfolio/nexo-dashboard.jpg"
+            alt="Panel de control de Nexo con resumen de contactos, pipeline abierto y facturación"
+            width="1264"
+            height="790"
+            loading="eager"
+            class="w-full"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section-kz border-b border-hairline bg-canvas">
+      <div class="container-kz">
+        <div class="reveal max-w-2xl">
+          <p class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">Módulos</p>
+          <h2 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">
+            12 módulos, actívalos según los necesites
+          </h2>
+          <p class="mt-4 text-body">
+            Cada negocio contrata solo los módulos que le hacen falta. Un taller no necesita
+            nóminas si no tiene empleados; una clínica sí. Nexo se adapta, no al revés.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {
+            modules.map((mod) => (
+              <div class="reveal rounded-md border border-hairline bg-surface-card p-6">
+                <h3 class="font-display text-base font-600 text-ink">{mod.name}</h3>
+                <p class="mt-2 text-sm text-accent">{mod.tagline}</p>
+                <ul class="mt-3 space-y-1.5 text-sm leading-relaxed text-body">
+                  {mod.bullets.map((b) => (
+                    <li>— {b}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-kz border-b border-hairline bg-canvas-deep">
+      <div class="container-kz">
+        <div class="reveal max-w-2xl">
+          <p class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">En la práctica</p>
+          <h2 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">Así se ve por dentro</h2>
+        </div>
+
+        <div class="mt-12 grid gap-6 sm:grid-cols-2">
+          <figure class="reveal overflow-hidden rounded-lg border border-hairline">
+            <img
+              src="/portfolio/nexo-pipeline.jpg"
+              alt="Pipeline de ventas de Nexo, tablero visual por etapas"
+              width="1264"
+              height="790"
+              loading="lazy"
+              class="w-full"
+            />
+            <figcaption class="border-t border-hairline bg-surface-card px-4 py-3 text-sm text-body">
+              Pipeline de ventas — arrastra oportunidades entre etapas.
+            </figcaption>
+          </figure>
+          <figure class="reveal overflow-hidden rounded-lg border border-hairline">
+            <img
+              src="/portfolio/nexo-facturacion.jpg"
+              alt="Listado de presupuestos y facturas en Nexo"
+              width="1264"
+              height="790"
+              loading="lazy"
+              class="w-full"
+            />
+            <figcaption class="border-t border-hairline bg-surface-card px-4 py-3 text-sm text-body">
+              Facturación — de presupuesto a factura en un clic.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-kz border-b border-hairline bg-canvas">
+      <div class="container-kz max-w-2xl">
+        <p class="font-mono text-xs uppercase tracking-[0.15em] text-body-soft">Cómo funciona</p>
+        <h2 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">Un sistema, cada negocio con lo suyo</h2>
+        <p class="mt-6 text-body leading-relaxed">
+          Nexo es multitenant: cada negocio tiene su propio espacio aislado, con sus propios
+          datos, usuarios y módulos contratados — nunca se mezcla nada entre clientes distintos.
+          Cada tenant puede tener su color de marca, para que se sienta como su propia
+          herramienta y no como un software genérico prestado.
+        </p>
+      </div>
+    </section>
+
+    <ContactSection source="kaizogroup-nexo" />
+  </main>
+  <Footer />
+  <Analytics slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} is:inline slot="head" />
+</BaseLayout>

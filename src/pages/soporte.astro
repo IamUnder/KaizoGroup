@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const altPath = '/en/support/';
+
+const faqs = [
+  {
+    q: '¿Qué pasa después del lanzamiento?',
+    a: 'El mantenimiento incluye un número de horas de soporte mensuales pactadas en el presupuesto, además de acompañamiento y resolución de dudas siempre que las necesites.',
+  },
+  {
+    q: '¿Tenéis un SLA formal?',
+    a: 'No manejamos un SLA firmado con penalizaciones, pero respondemos por correo o teléfono en menos de 24 horas — es un compromiso que cumplimos con todos los clientes, no solo con los que tienen contrato de soporte.',
+  },
+  {
+    q: '¿Puedo ampliar las horas de soporte si me quedo corto?',
+    a: 'Sí. Si un mes se te quedan cortas las horas pactadas, lo hablamos y ajustamos el plan — sin sorpresas ni cargos automáticos de más.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="Soporte y mantenimiento | KaizoGroup"
+  description="Qué incluye el soporte tras el lanzamiento de tu proyecto, qué no incluye, y cómo pedirlo — tiempo de respuesta en menos de 24 horas."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content" class="section-kz">
+    <div class="container-kz max-w-2xl">
+      <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">Después del lanzamiento</p>
+      <h1 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">Qué incluye el soporte</h1>
+      <p class="mt-6 text-body leading-relaxed">
+        No desaparecemos al entregar el proyecto — es una de las cosas que más nos diferencia.
+        Esto es lo que significa en la práctica.
+      </p>
+
+      <div class="mt-10 space-y-8 text-body">
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">Qué cubre</h2>
+          <p class="mt-3 leading-relaxed">
+            Corrección de errores, dudas de uso, ajustes pequeños (cambios de texto, pequeños
+            retoques visuales, actualizaciones de contenido) dentro de las horas mensuales
+            pactadas en tu presupuesto.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">Qué no cubre</h2>
+          <p class="mt-3 leading-relaxed">
+            Funcionalidades nuevas de cierto tamaño (una sección nueva, una integración con otro
+            sistema, un módulo completo) no entran dentro del soporte — se valoran y cotizan
+            aparte, igual que el proyecto original, para que el mantenimiento no se convierta en
+            un cajón de sastre sin control de alcance.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">Cómo se pide</h2>
+          <p class="mt-3 leading-relaxed">
+            Por correo o por teléfono, igual que cualquier otro contacto. Respondemos en menos de
+            24 horas y, si es algo rápido, normalmente queda resuelto el mismo día.
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-12 divide-y divide-hairline border-t border-b border-hairline">
+        {
+          faqs.map((item) => (
+            <details class="group py-5">
+              <summary class="cursor-pointer list-none font-display text-base font-600 text-ink [&::-webkit-details-marker]:hidden">
+                {item.q}
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-body">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+
+      <p class="mt-10 text-body">
+        ¿Tienes una duda que no está aquí?{' '}
+        <a href="/dudas" class="text-ink underline underline-offset-2">Ver todas las preguntas</a>
+        {' '}o{' '}
+        <a href="/#contacto" class="text-ink underline underline-offset-2">escríbenos directamente</a>.
+      </p>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline slot="head" />
+  <Footer />
+</BaseLayout>

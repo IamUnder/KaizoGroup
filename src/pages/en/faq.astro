@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const altPath = '/dudas/';
+
+const faqs = [
+  {
+    q: 'How much does a project cost?',
+    a: "It depends on each client's needs. We don't work with fixed catalog prices — every project is scoped on its actual requirements. More detail on the billing page.",
+  },
+  {
+    q: 'How long does development take?',
+    a: 'Again, it depends on scope, but as a reference point, a typical project takes around a month to build.',
+  },
+  {
+    q: 'What happens after launch?',
+    a: 'Maintenance includes a number of monthly support hours agreed in the quote, plus ongoing support and answers to any questions. More detail on the support page.',
+  },
+  {
+    q: 'How do I get in touch?',
+    a: 'By email or phone — we reply in under 24 hours.',
+  },
+  {
+    q: 'Do you only work in Puertollano and Ciudad Real?',
+    a: "That's our home base, and where we know local businesses best, but we work remotely with clients across Spain — and beyond — without any issue.",
+  },
+  {
+    q: 'Do you work with a contract?',
+    a: "Yes. A contract is signed on approving the quote, covering ownership of the delivered code, confidentiality, and other legal terms depending on the type of project — a custom build for a client isn't the same as work on a product we own, like Nexo. More detail on the billing page.",
+  },
+  {
+    q: "What if I don't like the result?",
+    a: "We work in short iterations for exactly this reason — you see progress from the first week, so any mismatch gets caught and fixed early, not at the end of the project.",
+  },
+  {
+    q: 'Can I request changes during development?',
+    a: "Yes, within reason for the agreed scope. If a change is significant, we tell you before touching it, along with its impact on timeline and price, so you decide whether to proceed.",
+  },
+  {
+    q: 'What technologies do you use?',
+    a: 'It depends on the project — we prioritize modern, fast tools with strong long-term support (Astro, React, Node, PostgreSQL, among others), not whatever is trendy that month.',
+  },
+  {
+    q: 'Do you use AI to write code?',
+    a: "Yes, as a day-to-day productivity tool. Design decisions, architecture, and final review of everything delivered remain ours, not the AI's.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="All your questions | KaizoGroup"
+  description="Pricing, timelines, support, technology, contracts — every frequently asked question about working with KaizoGroup in one place."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content" class="section-kz">
+    <div class="container-kz max-w-2xl">
+      <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">Frequently asked questions</p>
+      <h1 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">All your questions</h1>
+      <p class="mt-6 text-body leading-relaxed">
+        This is the long version of the FAQ on the homepage — if your question isn't here, send
+        it to us directly and we'll answer it.
+      </p>
+
+      <div class="mt-10 divide-y divide-hairline border-t border-b border-hairline">
+        {
+          faqs.map((item) => (
+            <details class="group py-5">
+              <summary class="cursor-pointer list-none font-display text-base font-600 text-ink [&::-webkit-details-marker]:hidden">
+                {item.q}
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-body">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+
+      <p class="mt-10 text-body">
+        None of these match your situation?{' '}
+        <a href="/en/#contacto" class="text-ink underline underline-offset-2">Tell us directly</a>.
+      </p>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline slot="head" />
+  <Footer />
+</BaseLayout>

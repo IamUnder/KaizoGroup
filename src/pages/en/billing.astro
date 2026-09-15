@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const altPath = '/cobro/';
+
+const faqs = [
+  {
+    q: 'How much does a project cost?',
+    a: "It depends on each client's needs. We don't work with fixed catalog prices — every project is scoped and priced on its actual requirements, so you never overpay or end up short on functionality.",
+  },
+  {
+    q: 'When do I pay?',
+    a: 'Payment is split in two: a deposit on approving the quote (typically 30%) and the rest on delivery (70%) — the exact split is adjusted to each client.',
+  },
+  {
+    q: 'What about larger projects?',
+    a: "Payment follows the project in phases: part on approving the quote, part on delivering the MVP, and the rest as each following agreed phase is completed.",
+  },
+  {
+    q: 'Do you issue invoices?',
+    a: 'Yes, a VAT invoice under Spanish tax law, tied to each accepted quote.',
+  },
+  {
+    q: 'Do you sign a contract?',
+    a: "Yes. A contract is signed on approving the quote, covering ownership of the delivered code, confidentiality, and other legal terms depending on the type of project — a custom build for a client isn't the same as work on a product we own, like Nexo, so the contract is adapted to each case.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="How billing works | KaizoGroup"
+  description="How we scope a quote, when you pay, and what each phase includes when working with KaizoGroup — no surprises, no fine print."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content" class="section-kz">
+    <div class="container-kz max-w-2xl">
+      <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">Pricing and payment</p>
+      <h1 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">How billing works</h1>
+      <p class="mt-6 text-body leading-relaxed">
+        We don't work off a fixed price list. Every business has different needs, and a catalog
+        price almost always ends up too small for some and too big for others. We'd rather
+        understand what you actually need first, then give you a quote scoped to that.
+      </p>
+
+      <div class="mt-10 space-y-8 text-body">
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">How we scope a quote</h2>
+          <p class="mt-3 leading-relaxed">
+            After the first conversation, we send a proposal with scope, timeline, and a fixed
+            price for that scope — no loose hourly billing, no surprises halfway through. If
+            something outside the agreed scope comes up during development, we tell you before
+            touching it, with its cost, so you decide whether to move forward.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">How you pay</h2>
+          <p class="mt-3 leading-relaxed">
+            On standard projects, payment is split in two: a deposit on approving the quote
+            (typically 30%) and the rest on delivery (70%) — the exact split is adjusted to each
+            client. On larger projects, payment follows the project in phases: part on approving
+            the quote, part on delivering the MVP, and the rest as each following agreed phase is
+            completed.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">Invoicing</h2>
+          <p class="mt-3 leading-relaxed">
+            We issue a VAT invoice for every accepted quote, under Spanish tax law. If the project
+            includes monthly maintenance, that's billed separately, on its own schedule.
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-12 divide-y divide-hairline border-t border-b border-hairline">
+        {
+          faqs.map((item) => (
+            <details class="group py-5">
+              <summary class="cursor-pointer list-none font-display text-base font-600 text-ink [&::-webkit-details-marker]:hidden">
+                {item.q}
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-body">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+
+      <p class="mt-10 text-body">
+        Got a question that's not here?{' '}
+        <a href="/en/faq" class="text-ink underline underline-offset-2">See all questions</a>
+        {' '}or{' '}
+        <a href="/en/#contacto" class="text-ink underline underline-offset-2">request your free audit</a>.
+      </p>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline slot="head" />
+  <Footer />
+</BaseLayout>

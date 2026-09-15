@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const altPath = '/soporte/';
+
+const faqs = [
+  {
+    q: 'What happens after launch?',
+    a: 'Maintenance includes a number of monthly support hours agreed in the quote, plus ongoing support and answers to any questions you have.',
+  },
+  {
+    q: 'Do you have a formal SLA?',
+    a: "We don't run a signed SLA with penalties, but we reply by email or phone in under 24 hours — a commitment we hold for every client, not just those with a support contract.",
+  },
+  {
+    q: "Can I extend my support hours if I run short?",
+    a: "Yes. If a given month's agreed hours aren't enough, we talk it through and adjust the plan — no surprises, no automatic extra charges.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="Support and maintenance | KaizoGroup"
+  description="What's included in support after your project launches, what isn't, and how to request it — we reply in under 24 hours."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content" class="section-kz">
+    <div class="container-kz max-w-2xl">
+      <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">After launch</p>
+      <h1 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">What support includes</h1>
+      <p class="mt-6 text-body leading-relaxed">
+        We don't disappear once the project ships — it's one of the things that sets us apart.
+        Here's what that means in practice.
+      </p>
+
+      <div class="mt-10 space-y-8 text-body">
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">What's covered</h2>
+          <p class="mt-3 leading-relaxed">
+            Bug fixes, usage questions, and small tweaks (copy changes, minor visual adjustments,
+            content updates) within the monthly hours agreed in your quote.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">What's not covered</h2>
+          <p class="mt-3 leading-relaxed">
+            Sizeable new features (a new section, an integration with another system, a full new
+            module) fall outside support — they're scoped and quoted separately, just like the
+            original project, so maintenance doesn't turn into an open-ended scope.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-lg font-600 text-ink">How to request it</h2>
+          <p class="mt-3 leading-relaxed">
+            By email or phone, same as any other contact. We reply in under 24 hours, and if it's
+            something quick, it's usually resolved the same day.
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-12 divide-y divide-hairline border-t border-b border-hairline">
+        {
+          faqs.map((item) => (
+            <details class="group py-5">
+              <summary class="cursor-pointer list-none font-display text-base font-600 text-ink [&::-webkit-details-marker]:hidden">
+                {item.q}
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-body">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+
+      <p class="mt-10 text-body">
+        Got a question that's not here?{' '}
+        <a href="/en/faq" class="text-ink underline underline-offset-2">See all questions</a>
+        {' '}or{' '}
+        <a href="/en/#contacto" class="text-ink underline underline-offset-2">reach out directly</a>.
+      </p>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline slot="head" />
+  <Footer />
+</BaseLayout>

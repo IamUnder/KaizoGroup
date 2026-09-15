@@ -1,0 +1,156 @@
+---
+import { ui, resolveLang } from '../i18n/ui';
+
+const lang = resolveLang(Astro.currentLocale);
+const t = ui[lang].quiz;
+const statusMessages = ui[lang].contact.status;
+---
+
+<div class="reveal mx-auto max-w-xl">
+  <form
+    id="quiz-form"
+    data-i18n-status={JSON.stringify(statusMessages)}
+    data-message-prefix={t.messagePrefix}
+    data-lang={lang}
+    novalidate
+  >
+    <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="No rellenar" />
+    <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="No rellenar" />
+    <input type="hidden" name="message" id="quiz-message" />
+
+    <div class="mb-8 flex gap-2" aria-hidden="true">
+      <div class="quiz-progress h-1 flex-1 rounded-full bg-surface-strong" data-progress="1"></div>
+      <div class="quiz-progress h-1 flex-1 rounded-full bg-surface-strong" data-progress="2"></div>
+      <div class="quiz-progress h-1 flex-1 rounded-full bg-surface-strong" data-progress="3"></div>
+    </div>
+
+    <div data-step="1">
+      <h2 class="font-display text-2xl font-600 text-ink sm:text-3xl">{t.situationQuestion}</h2>
+      <div class="mt-6 grid gap-3">
+        {
+          t.situationOptions.map((option) => (
+            <button
+              type="button"
+              class="quiz-option rounded-md border border-hairline bg-surface-card p-4 text-left text-ink transition-colors hover:border-accent"
+              data-value={option}
+            >
+              {option}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <div data-step="2" class="hidden">
+      <label for="quiz-business" class="block font-display text-2xl font-600 text-ink sm:text-3xl">
+        {t.businessLabel}
+      </label>
+      <input
+        id="quiz-business"
+        name="business"
+        type="text"
+        placeholder={t.businessPlaceholder}
+        class="mt-6 w-full rounded-sm border-0 bg-surface-strong px-4 py-3 text-sm text-ink outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      />
+      <div class="mt-8 flex items-center justify-between">
+        <button type="button" data-back class="text-sm text-body-soft hover:text-ink">{t.backLabel}</button>
+        <button type="button" data-next class="btn-primary">{t.nextLabel}</button>
+      </div>
+    </div>
+
+    <div data-step="3" class="hidden">
+      <h2 class="font-display text-2xl font-600 text-ink sm:text-3xl">{t.contactHeading}</h2>
+      <div class="mt-6 grid gap-4">
+        <div>
+          <label for="quiz-name" class="block text-sm font-500 text-ink">{t.nameLabel}</label>
+          <input
+            id="quiz-name"
+            name="name"
+            type="text"
+            required
+            autocomplete="name"
+            class="mt-2 w-full rounded-sm border-0 bg-surface-strong px-4 py-3 text-sm text-ink outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          />
+        </div>
+        <div>
+          <label for="quiz-email" class="block text-sm font-500 text-ink">{t.emailLabel}</label>
+          <input
+            id="quiz-email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            class="mt-2 w-full rounded-sm border-0 bg-surface-strong px-4 py-3 text-sm text-ink outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          />
+        </div>
+      </div>
+      <div class="mt-8 flex items-center justify-between gap-4">
+        <button type="button" data-back class="text-sm text-body-soft hover:text-ink">{t.backLabel}</button>
+        <button type="submit" class="btn-primary">{t.submitLabel}</button>
+      </div>
+      <p id="quiz-status" class="mt-4 text-sm" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+</div>
+
+<style>
+  .quiz-progress.active {
+    background-color: var(--color-accent);
+  }
+</style>
+
+<script>
+  import { initLeadForm } from '../scripts/leadSubmit';
+
+  const form = document.getElementById('quiz-form') as HTMLFormElement | null;
+  const status = document.getElementById('quiz-status');
+  const messageInput = document.getElementById('quiz-message') as HTMLInputElement | null;
+  const businessInput = document.getElementById('quiz-business') as HTMLInputElement | null;
+  const messagePrefix = form?.dataset.messagePrefix ?? '';
+  let selectedSituation = '';
+
+  const steps = [...document.querySelectorAll<HTMLElement>('[data-step]')];
+  const progressDots = [...document.querySelectorAll<HTMLElement>('[data-progress]')];
+
+  function goToStep(n: number) {
+    steps.forEach((el) => el.classList.toggle('hidden', el.dataset.step !== String(n)));
+    progressDots.forEach((el) => el.classList.toggle('active', Number(el.dataset.progress) <= n));
+    window.dispatchEvent(new CustomEvent('kz:analytics', { detail: { event: `quiz_step_${n}` } }));
+  }
+
+  document.querySelectorAll<HTMLElement>('.quiz-option').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      selectedSituation = btn.dataset.value ?? '';
+      document.querySelectorAll('.quiz-option').forEach((b) => b.classList.remove('border-accent'));
+      btn.classList.add('border-accent');
+      goToStep(2);
+    });
+  });
+
+  document.querySelectorAll('[data-next]').forEach((btn) => btn.addEventListener('click', () => goToStep(3)));
+  document.querySelectorAll('[data-back]').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const current = steps.find((el) => !el.classList.contains('hidden'));
+      const n = Number(current?.dataset.step ?? '1');
+      goToStep(Math.max(1, n - 1));
+    })
+  );
+
+  if (form) {
+    // Este listener debe registrarse ANTES de initLeadForm: los listeners de "submit" sobre el
+    // mismo elemento se ejecutan en orden de registro, y initLeadForm lee el FormData de forma
+    // síncrona nada más disparar el evento — el mensaje tiene que estar ya escrito para entonces.
+    form.addEventListener('submit', () => {
+      if (messageInput) {
+        const business = businessInput?.value.trim();
+        messageInput.value = `${messagePrefix}${selectedSituation}.${business ? ' Negocio: ' + business + '.' : ''}`;
+      }
+    });
+
+    initLeadForm(form, status, {
+      source: 'kaizogroup-quiz',
+      analyticsEvent: 'quiz_completed',
+      subjectPrefix: 'Lead del cuestionario "¿Podemos ayudarte?"',
+    });
+  }
+</script>

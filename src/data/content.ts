@@ -96,6 +96,14 @@ const es: ContentSet = {
       url: '#contacto',
       status: 'En desarrollo',
     },
+    {
+      name: 'Nexo',
+      description:
+        'Nuestro CRM/ERP modular multitenant: contactos, ventas, facturación, inventario, TPV y más — cada negocio paga solo por lo que usa.',
+      image: '/portfolio/nexo-dashboard.jpg',
+      stack: ['Fastify', 'Drizzle', 'React'],
+      url: '/nexo',
+    },
   ],
   process: [
     {
@@ -224,6 +232,14 @@ const en: ContentSet = {
       stack: ['Odoo'],
       url: '#contacto',
       status: 'In development',
+    },
+    {
+      name: 'Nexo',
+      description:
+        'Our modular, multitenant CRM/ERP: contacts, sales, invoicing, inventory, point of sale, and more — every business pays only for what it uses.',
+      image: '/portfolio/nexo-dashboard.jpg',
+      stack: ['Fastify', 'Drizzle', 'React'],
+      url: '/en/nexo',
     },
   ],
   process: [

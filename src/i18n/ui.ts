@@ -68,15 +68,33 @@ export interface Dictionary {
       error: string;
     };
   };
-  faq: { eyebrow: string; h2: string };
+  faq: { eyebrow: string; h2: string; moreLabel: string };
   footer: {
     contact: string;
     nav: string;
     legal: string;
     googleBusiness: string;
     legalLinks: LegalLink[];
+    resourceLinks: LegalLink[];
     rights: string;
   };
+  quiz: {
+    eyebrow: string;
+    h1: string;
+    subtitle: string;
+    situationQuestion: string;
+    situationOptions: string[];
+    businessLabel: string;
+    businessPlaceholder: string;
+    contactHeading: string;
+    nameLabel: string;
+    emailLabel: string;
+    submitLabel: string;
+    backLabel: string;
+    nextLabel: string;
+    messagePrefix: string;
+  };
+  heroQuizTeaser: string;
 }
 
 export const ui: Record<Lang, Dictionary> = {
@@ -172,6 +190,7 @@ export const ui: Record<Lang, Dictionary> = {
     faq: {
       eyebrow: 'FAQ',
       h2: 'Preguntas frecuentes',
+      moreLabel: 'Ver todas las preguntas',
     },
     footer: {
       contact: 'Contacto',
@@ -182,8 +201,37 @@ export const ui: Record<Lang, Dictionary> = {
         { label: 'Aviso legal', href: '/legal/aviso-legal' },
         { label: 'Privacidad', href: '/legal/privacidad' },
       ],
+      resourceLinks: [
+        { label: 'Cómo funciona el cobro', href: '/cobro' },
+        { label: 'Soporte', href: '/soporte' },
+        { label: 'Todas las dudas', href: '/dudas' },
+        { label: 'Nexo (CRM)', href: '/nexo' },
+      ],
       rights: 'Todos los derechos reservados.',
     },
+    quiz: {
+      eyebrow: '¿Podemos ayudarte?',
+      h1: 'Cuéntanos qué necesitas en 3 pasos',
+      subtitle:
+        'Sin compromiso — al final te decimos cómo te ayudaríamos, y puedes pedirnos que te contactemos.',
+      situationQuestion: '¿Qué tienes ahora mismo?',
+      situationOptions: [
+        'No tengo página web',
+        'Tengo web pero no me trae clientes',
+        'Tengo web y funciona bien, busco otra cosa',
+        'Busco una herramienta para gestionar mi negocio',
+      ],
+      businessLabel: 'Nombre de tu negocio (opcional)',
+      businessPlaceholder: 'Ej. Peluquería Ana',
+      contactHeading: 'Ya casi está — ¿cómo te contactamos?',
+      nameLabel: 'Nombre',
+      emailLabel: 'Email',
+      submitLabel: 'Enviar',
+      backLabel: '← Atrás',
+      nextLabel: 'Siguiente →',
+      messagePrefix: 'Cuestionario "¿Podemos ayudarte?" — Situación: ',
+    },
+    heroQuizTeaser: '¿No sabes por dónde empezar? Haz el test',
   },
   en: {
     htmlLang: 'en',
@@ -277,6 +325,7 @@ export const ui: Record<Lang, Dictionary> = {
     faq: {
       eyebrow: 'FAQ',
       h2: 'Frequently asked questions',
+      moreLabel: 'See all questions',
     },
     footer: {
       contact: 'Contact',
@@ -287,8 +336,37 @@ export const ui: Record<Lang, Dictionary> = {
         { label: 'Legal notice', href: '/en/legal/legal-notice' },
         { label: 'Privacy policy', href: '/en/legal/privacy-policy' },
       ],
+      resourceLinks: [
+        { label: 'How billing works', href: '/en/billing' },
+        { label: 'Support', href: '/en/support' },
+        { label: 'All FAQs', href: '/en/faq' },
+        { label: 'Nexo (CRM)', href: '/en/nexo' },
+      ],
       rights: 'All rights reserved.',
     },
+    quiz: {
+      eyebrow: 'Can we help you?',
+      h1: 'Tell us what you need in 3 steps',
+      subtitle:
+        "No strings attached — at the end we'll tell you how we'd help, and you can ask us to reach out.",
+      situationQuestion: 'What do you have right now?',
+      situationOptions: [
+        "I don't have a website",
+        "I have a website but it's not bringing customers",
+        'I have a website that works well, I need something else',
+        "I'm looking for a tool to manage my business",
+      ],
+      businessLabel: 'Your business name (optional)',
+      businessPlaceholder: "E.g. Ana's Hair Salon",
+      contactHeading: 'Almost there — how should we reach you?',
+      nameLabel: 'Name',
+      emailLabel: 'Email',
+      submitLabel: 'Send',
+      backLabel: '← Back',
+      nextLabel: 'Next →',
+      messagePrefix: 'Quiz "Can we help you?" — Situation: ',
+    },
+    heroQuizTeaser: 'Not sure where to start? Take the quiz',
   },
 };
 

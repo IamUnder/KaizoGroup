@@ -6,6 +6,7 @@ import { ui, resolveLang } from '../i18n/ui';
 const lang = resolveLang(Astro.currentLocale);
 const t = ui[lang].faq;
 const { faqs } = getContent(lang);
+const moreHref = lang === 'es' ? '/dudas' : '/en/faq';
 ---
 
 <section id="faq" class="section-kz border-b border-hairline bg-canvas">
@@ -28,5 +29,9 @@ const { faqs } = getContent(lang);
         ))
       }
     </div>
+
+    <p class="reveal mt-8">
+      <a href={moreHref} class="text-sm text-ink underline underline-offset-2">{t.moreLabel} →</a>
+    </p>
   </div>
 </section>

@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const altPath = '/en/faq/';
+
+const faqs = [
+  {
+    q: '¿Cuánto cuesta un proyecto?',
+    a: 'Depende de las necesidades de cada cliente. No trabajamos con presupuestos cerrados de catálogo — cada proyecto se valora según su alcance real. Más detalle en la página de cómo funciona el cobro.',
+  },
+  {
+    q: '¿Cuánto tarda el desarrollo?',
+    a: 'También depende del alcance, pero como referencia, un proyecto típico ronda el mes de desarrollo.',
+  },
+  {
+    q: '¿Qué pasa después del lanzamiento?',
+    a: 'El mantenimiento incluye un número de horas de soporte mensuales pactadas en el presupuesto, además de acompañamiento y resolución de dudas. Más detalle en la página de soporte.',
+  },
+  {
+    q: '¿Cómo os contacto?',
+    a: 'Por correo o por teléfono — respondemos en menos de 24 horas.',
+  },
+  {
+    q: '¿Trabajáis solo en Puertollano y Ciudad Real?',
+    a: 'Esa es nuestra base y donde conocemos mejor a los negocios locales, pero trabajamos en remoto con clientes de toda España sin ningún problema.',
+  },
+  {
+    q: '¿Trabajáis con contrato?',
+    a: 'Sí. Al aprobar el presupuesto se firma un contrato que cubre la propiedad del código entregado, la confidencialidad y el resto de aspectos legales según el tipo de proyecto — no es lo mismo un desarrollo a medida para un cliente que un desarrollo sobre un producto propio como Nexo. Más detalle en la página de cómo funciona el cobro.',
+  },
+  {
+    q: '¿Qué pasa si no me gusta el resultado?',
+    a: 'Trabajamos en iteraciones cortas precisamente para eso — ves avances desde la primera semana, así que cualquier desajuste se detecta y se corrige pronto, no al final del proyecto.',
+  },
+  {
+    q: '¿Puedo pedir cambios durante el desarrollo?',
+    a: 'Sí, dentro de lo razonable del alcance pactado. Si el cambio es grande, te lo decimos antes de tocarlo, con su impacto en plazo y precio, para que decidas si sigue adelante.',
+  },
+  {
+    q: '¿Qué tecnologías usáis?',
+    a: 'Depende del proyecto — priorizamos herramientas modernas, rápidas y con buen soporte a largo plazo (Astro, React, Node, PostgreSQL, entre otras), no la tecnología de moda del momento.',
+  },
+  {
+    q: '¿Usáis inteligencia artificial para programar?',
+    a: 'Sí, como herramienta de productividad en el día a día. Las decisiones de diseño, arquitectura y la revisión final de todo lo que se entrega siguen siendo nuestras, no de la IA.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<BaseLayout
+  title="Todas tus dudas | KaizoGroup"
+  description="Precio, plazos, soporte, tecnología, contratos — todas las preguntas frecuentes sobre trabajar con KaizoGroup en un mismo sitio."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content" class="section-kz">
+    <div class="container-kz max-w-2xl">
+      <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">Preguntas frecuentes</p>
+      <h1 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">Todas tus dudas</h1>
+      <p class="mt-6 text-body leading-relaxed">
+        Esta es la versión larga de la FAQ de la home — si tu pregunta no está aquí, mándanosla
+        directamente y la respondemos.
+      </p>
+
+      <div class="mt-10 divide-y divide-hairline border-t border-b border-hairline">
+        {
+          faqs.map((item) => (
+            <details class="group py-5">
+              <summary class="cursor-pointer list-none font-display text-base font-600 text-ink [&::-webkit-details-marker]:hidden">
+                {item.q}
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-body">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+
+      <p class="mt-10 text-body">
+        ¿Ninguna respuesta encaja con tu caso?{' '}
+        <a href="/#contacto" class="text-ink underline underline-offset-2">Cuéntanoslo directamente</a>.
+      </p>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline slot="head" />
+  <Footer />
+</BaseLayout>
