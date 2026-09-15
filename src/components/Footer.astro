@@ -10,6 +10,12 @@ const t = ui[lang];
 const currentYear = new Date().getFullYear();
 
 const socialLinks = Object.entries(siteConfig.social).filter(([, url]) => url);
+
+// Mismo problema que en Header: t.nav son anclas (#solucion...) que solo existen en la home.
+const mirroredPath = Astro.url.pathname.replace(/^\/en/, '') || '/';
+const isHome = mirroredPath === '/';
+const homePath = lang === 'en' ? '/en' : '';
+const sectionHref = (hash: string) => (isHome ? hash : `${homePath}/${hash}`);
 ---
 
 <footer class="bg-canvas-deep">
@@ -53,7 +59,7 @@ const socialLinks = Object.entries(siteConfig.social).filter(([, url]) => url);
         {
           t.nav.map((item) => (
             <li>
-              <a href={item.href} class="text-body hover:text-ink">
+              <a href={sectionHref(item.href)} class="text-body hover:text-ink">
                 {item.label}
               </a>
             </li>

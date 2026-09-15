@@ -46,6 +46,16 @@ export interface Dictionary {
   about: { eyebrow: string; h2: string; body: string };
   problem: { eyebrow: string; h2: string };
   solution: { eyebrow: string; h2: string };
+  nexoFeature: {
+    eyebrow: string;
+    h2: string;
+    body: string;
+    sectors: string[];
+    modules: { name: string; tagline: string }[];
+    ctaPrimary: string;
+    ctaSecondary: string;
+    imageAlt: string;
+  };
   portfolio: { eyebrow: string; h2: string; imageAltPrefix: string };
   process: { eyebrow: string; h2: string };
   socialProof: { eyebrow: string; h2: string };
@@ -153,6 +163,20 @@ export const ui: Record<Lang, Dictionary> = {
     solution: {
       eyebrow: 'La solución',
       h2: 'Qué cambia cuando trabajas con KaizoGroup',
+    },
+    nexoFeature: {
+      eyebrow: 'Producto propio de KaizoGroup',
+      h2: 'Nexo: el CRM/ERP que construimos y vendemos nosotros',
+      body: 'Contactos, ventas, facturación, inventario y mucho más en una sola herramienta modular — cada negocio paga solo por los módulos que usa. Es el producto que mejor conocemos, porque lo hemos construido nosotros de principio a fin.',
+      sectors: ['Talleres', 'Peluquerías', 'Clínicas', 'Tiendas', 'Inmobiliarias'],
+      modules: [
+        { name: 'Contactos', tagline: 'Toda tu cartera de clientes en un único sitio.' },
+        { name: 'Pipeline de ventas', tagline: 'Sigue cada oportunidad hasta que se cierra.' },
+        { name: 'Facturación', tagline: 'De presupuesto a factura en un clic.' },
+      ],
+      ctaPrimary: 'Descubre Nexo',
+      ctaSecondary: 'Pide una demo',
+      imageAlt: 'Panel de control de Nexo con resumen de contactos, pipeline abierto y facturación',
     },
     portfolio: {
       eyebrow: 'Porfolio',
@@ -288,6 +312,20 @@ export const ui: Record<Lang, Dictionary> = {
     solution: {
       eyebrow: 'The solution',
       h2: 'What changes when you work with KaizoGroup',
+    },
+    nexoFeature: {
+      eyebrow: "KaizoGroup's own product",
+      h2: 'Nexo: the CRM/ERP we build and sell ourselves',
+      body: "Contacts, sales, invoicing, inventory and more in one modular tool — every business pays only for the modules it uses. It's the product we know best, because we built it ourselves from the ground up.",
+      sectors: ['Workshops', 'Hair salons', 'Clinics', 'Shops', 'Real estate agencies'],
+      modules: [
+        { name: 'Contacts', tagline: 'Your entire customer base in one place.' },
+        { name: 'Sales pipeline', tagline: 'Track every deal until it closes.' },
+        { name: 'Invoicing', tagline: 'From quote to invoice in one click.' },
+      ],
+      ctaPrimary: 'Discover Nexo',
+      ctaSecondary: 'Request a demo',
+      imageAlt: 'Nexo dashboard showing a contacts summary, open pipeline and invoicing',
     },
     portfolio: {
       eyebrow: 'Portfolio',

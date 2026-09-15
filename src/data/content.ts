@@ -71,6 +71,14 @@ const es: ContentSet = {
   ],
   portfolio: [
     {
+      name: 'Nexo',
+      description:
+        'Nuestro CRM/ERP modular multitenant: contactos, ventas, facturación, inventario, TPV y más — cada negocio paga solo por lo que usa.',
+      image: '/portfolio/nexo-dashboard.jpg',
+      stack: ['Fastify', 'Drizzle', 'React'],
+      url: '/nexo',
+    },
+    {
       name: 'Portledger',
       description:
         'El CRM/PaaS interno que usamos en KaizoGroup para gestionar clientes, proyectos e infraestructura. No está expuesto públicamente, pero podemos enseñarte cómo trabajamos en una demo cerrada.',
@@ -95,14 +103,6 @@ const es: ContentSet = {
       stack: ['Odoo'],
       url: '#contacto',
       status: 'En desarrollo',
-    },
-    {
-      name: 'Nexo',
-      description:
-        'Nuestro CRM/ERP modular multitenant: contactos, ventas, facturación, inventario, TPV y más — cada negocio paga solo por lo que usa.',
-      image: '/portfolio/nexo-dashboard.jpg',
-      stack: ['Fastify', 'Drizzle', 'React'],
-      url: '/nexo',
     },
   ],
   process: [
@@ -208,6 +208,14 @@ const en: ContentSet = {
   ],
   portfolio: [
     {
+      name: 'Nexo',
+      description:
+        'Our modular, multitenant CRM/ERP: contacts, sales, invoicing, inventory, point of sale, and more — every business pays only for what it uses.',
+      image: '/portfolio/nexo-dashboard.jpg',
+      stack: ['Fastify', 'Drizzle', 'React'],
+      url: '/en/nexo',
+    },
+    {
       name: 'Portledger',
       description:
         "The internal CRM/PaaS we use at KaizoGroup to manage clients, projects, and infrastructure. It's not publicly available, but we can show you how we work in a closed demo.",
@@ -232,14 +240,6 @@ const en: ContentSet = {
       stack: ['Odoo'],
       url: '#contacto',
       status: 'In development',
-    },
-    {
-      name: 'Nexo',
-      description:
-        'Our modular, multitenant CRM/ERP: contacts, sales, invoicing, inventory, point of sale, and more — every business pays only for what it uses.',
-      image: '/portfolio/nexo-dashboard.jpg',
-      stack: ['Fastify', 'Drizzle', 'React'],
-      url: '/en/nexo',
     },
   ],
   process: [
