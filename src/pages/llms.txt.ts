@@ -9,6 +9,9 @@ export const GET: APIRoute = async ({ site }) => {
   const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
   );
+  const postsEn = (await getCollection('blogEn', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+  );
 
   const lines = [
     `# ${siteConfig.name}`,
@@ -31,9 +34,13 @@ export const GET: APIRoute = async ({ site }) => {
     '## Porfolio',
     ...es.portfolio.map((p) => `- ${p.name}${p.status ? ` (${p.status})` : ''}: ${p.description}`),
     '',
-    '## Blog',
+    '## Blog (español)',
     `Guías prácticas para gestionar un negocio (talleres, peluquerías, clínicas, tiendas, inmobiliarias) — ver ${base}/blog/`,
     ...posts.map((p) => `- [${p.data.title}](${base}/blog/${p.id}/): ${p.data.quickAnswer}`),
+    '',
+    '## Blog (English)',
+    `Practical guides for running a small business (workshops, salons, clinics, shops, real estate) — see ${base}/en/blog/`,
+    ...postsEn.map((p) => `- [${p.data.title}](${base}/en/blog/${p.id}/): ${p.data.quickAnswer}`),
     '',
     '## Preguntas frecuentes',
     ...es.faqs.map((f) => `- ${f.question} ${f.answer}`),

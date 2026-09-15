@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Analytics from '../../../components/Analytics.astro';
+import { SECTOR_LABELS_EN } from '../../../lib/blogSectors';
+
+const altPath = '/blog/';
+
+const posts = (await getCollection('blogEn', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout
+  title="Blog — CRM/ERP for small businesses | KaizoGroup"
+  description="Practical guides for running your business: invoicing, sales, inventory, and more — written for workshops, salons, clinics, shops, and real estate agencies."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content">
+    <section class="section-kz border-b border-hairline bg-canvas-deep">
+      <div class="container-kz">
+        <div class="reveal max-w-2xl">
+          <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">Blog</p>
+          <h1 class="mt-3 font-display text-4xl font-600 text-ink sm:text-5xl">Guides for running your business</h1>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-body">
+            No filler — direct answers to what a business owner actually asks before getting better
+            organized.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-kz bg-canvas">
+      <div class="container-kz">
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {
+            posts.map((post) => (
+              <a href={`/en/blog/${post.id}/`} class="reveal group flex flex-col rounded-lg border border-hairline bg-surface-card p-6 transition-colors hover:border-accent/40">
+                <span class="font-mono text-xs uppercase tracking-[0.1em] text-accent">{SECTOR_LABELS_EN[post.data.sector]}</span>
+                <h2 class="mt-3 font-display text-lg font-600 text-ink group-hover:text-accent">{post.data.title}</h2>
+                <p class="mt-2 flex-1 text-sm leading-relaxed text-body">{post.data.description}</p>
+                <p class="mt-4 text-xs text-body-soft">{dateFormatter.format(post.data.publishDate)}</p>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <Analytics slot="head" />
+</BaseLayout>
