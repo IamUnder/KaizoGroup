@@ -43,6 +43,23 @@ services:
       - "traefik.http.routers.kaizogroup-insecure.entrypoints=web"
       - "traefik.http.routers.kaizogroup-insecure.middlewares=kaizogroup-https-redirect"
       - "traefik.http.middlewares.kaizogroup-https-redirect.redirectscheme.scheme=https"
+      # www.${SITE_DOMAIN} -> ${SITE_DOMAIN}: Google Search Console detectó que
+      # http(s)://www.${SITE_DOMAIN} responde con el mismo contenido (solo excluido del índice
+      # porque la etiqueta canonical apunta al dominio sin www) — sin esta regla, Traefik no
+      # tenía ningún router que hiciera match de ese host y algo por delante (DNS/PaaS) lo
+      # acababa sirviendo igualmente. Con esto, cualquier variante con www redirige (301) al
+      # dominio canónico en vez de servir contenido duplicado.
+      - "traefik.http.routers.kaizogroup-www-secure.rule=Host(`www.${SITE_DOMAIN}`)"
+      - "traefik.http.routers.kaizogroup-www-secure.entrypoints=websecure"
+      - "traefik.http.routers.kaizogroup-www-secure.tls=true"
+      - "traefik.http.routers.kaizogroup-www-secure.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.kaizogroup-www-secure.middlewares=kaizogroup-www-redirect"
+      - "traefik.http.routers.kaizogroup-www-insecure.rule=Host(`www.${SITE_DOMAIN}`)"
+      - "traefik.http.routers.kaizogroup-www-insecure.entrypoints=web"
+      - "traefik.http.routers.kaizogroup-www-insecure.middlewares=kaizogroup-www-redirect"
+      - "traefik.http.middlewares.kaizogroup-www-redirect.redirectregex.regex=^https?://www\\.${SITE_DOMAIN}/(.*)"
+      - "traefik.http.middlewares.kaizogroup-www-redirect.redirectregex.replacement=https://${SITE_DOMAIN}/$${1}"
+      - "traefik.http.middlewares.kaizogroup-www-redirect.redirectregex.permanent=true"
 
 networks:
   proxy:
