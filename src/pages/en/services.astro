@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const altPath = '/servicios/';
+---
+
+<BaseLayout
+  title="Services & Pricing | KaizoGroup"
+  description="Sprints and monthly plans with fixed scope, timeline and price — automation for small businesses and backend/cloud capacity (Java, Spring, AWS, Kubernetes) for technical teams."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content" class="section-kz">
+    <div class="container-kz max-w-2xl">
+      <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">Services & pricing</p>
+      <h1 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">
+        Backend, cloud and automation, in closed packages
+      </h1>
+      <p class="mt-6 text-body leading-relaxed">
+        Every service has a fixed scope, timeline and price set upfront — no open-ended projects,
+        no surprises halfway through. Two lines of work, depending on what your business or your
+        team needs.
+      </p>
+    </div>
+
+    <div class="container-kz mt-14 max-w-3xl">
+      <h2 class="font-display text-2xl font-600 text-ink">For small businesses</h2>
+      <p class="mt-3 text-body leading-relaxed">
+        Automating processes that are still done by hand — quotes, work orders, alerts, reports —
+        and simple maintenance for what's already built.
+      </p>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2">
+        <div class="rounded-lg border border-hairline bg-surface-card p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.1em] text-accent">€600-1,000 · 7-15 days</p>
+          <h3 class="mt-2 font-display text-lg font-600 text-ink">Business automation sprint</h3>
+          <p class="mt-3 text-sm leading-relaxed text-body">
+            Analysis of a repetitive process, automation of one flow, a simple interface where it
+            makes sense, documentation, one hour of training and defect fixes for 15 days.
+          </p>
+          <p class="mt-4 text-sm text-body-soft">
+            Examples: a form that generates a quote or work order as a PDF, alerts for documents
+            about to expire, a tracking panel for jobs or bookings, importing spreadsheets into
+            reports.
+          </p>
+          <p class="mt-4 text-xs text-body-soft">
+            Doesn't include a full ERP, a native mobile app, bulk migration, or unlimited support.
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-hairline bg-surface-card p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.1em] text-accent">€250/mo · up to 3h</p>
+          <h3 class="mt-2 font-display text-lg font-600 text-ink">Local maintenance</h3>
+          <p class="mt-3 text-sm leading-relaxed text-body">
+            Up to 3 hours a month (non-cumulative) for basic oversight, backups, small changes and
+            a quarterly review of what was delivered.
+          </p>
+          <p class="mt-4 text-xs text-body-soft">
+            Built to keep an existing automation running, not for large new features.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-kz mt-14 max-w-3xl">
+      <h2 class="font-display text-2xl font-600 text-ink">For technical and digital teams</h2>
+      <p class="mt-3 text-body leading-relaxed">
+        Backend/cloud capacity specialized in Java, Spring Boot, AWS and Kubernetes —
+        integrations, deployments, performance and observability — when a team needs to close a
+        technical block without bringing on a full-time hire.
+      </p>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2">
+        <div class="rounded-lg border border-hairline bg-surface-card p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.1em] text-accent">€900-1,500 · 5-10 business days</p>
+          <h3 class="mt-2 font-display text-lg font-600 text-ink">Backend/cloud sprint</h3>
+          <p class="mt-3 text-sm leading-relaxed text-body">
+            Diagnosis, agreed execution, testing, documentation and technical delivery on a
+            well-scoped problem.
+          </p>
+          <p class="mt-4 text-sm text-body-soft">
+            Cases: API integration, deployment issues, performance, Docker/CI-CD, observability, a
+            small migration, or an architecture review.
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-hairline bg-surface-card p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.1em] text-accent">€650/mo · up to 10h</p>
+          <h3 class="mt-2 font-display text-lg font-600 text-ink">Monthly technical partner</h3>
+          <p class="mt-3 text-sm leading-relaxed text-body">
+            Up to 10 hours a month (non-cumulative), with an initial three-month commitment, for
+            fixes, small improvements, advice and reserved capacity.
+          </p>
+          <p class="mt-4 text-xs text-body-soft">
+            Extra hours at €70/h with prior approval. Doesn't include on-call coverage, 24/7
+            support, or large projects.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-kz mt-14 max-w-2xl">
+      <h2 class="font-display text-2xl font-600 text-ink">How it works</h2>
+      <p class="mt-4 text-body leading-relaxed">
+        We start with a short, free diagnosis to confirm there's a real problem worth solving. If
+        it's a fit, the first sprint delivers fast, verifiable value. From there, a monthly plan
+        reserves capacity to maintain and evolve what's built, so you don't have to quote every
+        small adjustment separately.
+      </p>
+
+      <p class="mt-10 text-body">
+        <a href="/en/#contacto" class="text-ink underline underline-offset-2">Tell me about your case</a>
+        {' '}and we'll review in fifteen minutes whether it makes sense.
+      </p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
