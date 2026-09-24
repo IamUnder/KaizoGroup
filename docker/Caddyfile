@@ -2,3 +2,12 @@
     reverse_proxy web:80
     encode gzip
 }
+
+# Google Search Console detectó www.{$SITE_DOMAIN} respondiendo con el mismo contenido que el
+# dominio sin www (solo excluido del índice porque la etiqueta canonical apunta al dominio
+# canónico) — Caddy solo tenía un site block para {$SITE_DOMAIN}, así que cualquier variante con
+# www la resolvía otra cosa por delante. Este bloque la redirige (301) al dominio canónico, con
+# TLS gestionado automáticamente por Caddy igual que el bloque de arriba.
+www.{$SITE_DOMAIN} {
+    redir https://{$SITE_DOMAIN}{uri} permanent
+}

@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const altPath = '/en/services/';
+---
+
+<BaseLayout
+  title="Servicios y precios | KaizoGroup"
+  description="Sprints y planes mensuales con alcance, plazo y precio cerrados — automatización para pymes y capacidad backend/cloud (Java, Spring, AWS, Kubernetes) para equipos técnicos."
+  altPath={altPath}
+>
+  <Header altPath={altPath} />
+  <main id="main-content" class="section-kz">
+    <div class="container-kz max-w-2xl">
+      <p class="font-mono text-xs uppercase tracking-[0.15em] text-accent">Servicios y precios</p>
+      <h1 class="mt-3 text-3xl font-display font-600 text-ink sm:text-4xl">
+        Backend, cloud y automatización, en paquetes cerrados
+      </h1>
+      <p class="mt-6 text-body leading-relaxed">
+        Cada servicio tiene alcance, plazo y precio definidos de antemano — sin proyectos
+        interminables ni sorpresas a mitad de camino. Dos líneas de trabajo, según lo que
+        necesite tu negocio o tu equipo.
+      </p>
+    </div>
+
+    <div class="container-kz mt-14 max-w-3xl">
+      <h2 class="font-display text-2xl font-600 text-ink">Para pymes y negocios locales</h2>
+      <p class="mt-3 text-body leading-relaxed">
+        Automatización de procesos que hoy se hacen a mano — presupuestos, partes de trabajo,
+        avisos, informes — y mantenimiento sencillo de lo ya construido.
+      </p>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2">
+        <div class="rounded-lg border border-hairline bg-surface-card p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.1em] text-accent">600-1.000 € · 7-15 días</p>
+          <h3 class="mt-2 font-display text-lg font-600 text-ink">Sprint de automatización empresarial</h3>
+          <p class="mt-3 text-sm leading-relaxed text-body">
+            Análisis de un proceso repetitivo, automatización de un flujo, interfaz sencilla si
+            procede, documentación, una hora de formación y corrección de defectos durante 15
+            días.
+          </p>
+          <p class="mt-4 text-sm text-body-soft">
+            Ejemplos: formulario que genera un presupuesto o parte en PDF, avisos de
+            documentación próxima a caducar, panel de seguimiento de trabajos o reservas,
+            importación de Excel y generación de informes.
+          </p>
+          <p class="mt-4 text-xs text-body-soft">
+            No incluye ERP completo, app móvil nativa, migración masiva ni soporte ilimitado.
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-hairline bg-surface-card p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.1em] text-accent">250 €/mes · hasta 3h</p>
+          <h3 class="mt-2 font-display text-lg font-600 text-ink">Mantenimiento local</h3>
+          <p class="mt-3 text-sm leading-relaxed text-body">
+            Hasta 3 horas mensuales (no acumulables) para supervisión básica, copias de
+            seguridad, pequeños cambios y una revisión trimestral de lo entregado.
+          </p>
+          <p class="mt-4 text-xs text-body-soft">
+            Pensado para mantener viva una automatización ya construida, no para nuevas
+            funcionalidades de gran alcance.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-kz mt-14 max-w-3xl">
+      <h2 class="font-display text-2xl font-600 text-ink">Para equipos técnicos y digitales</h2>
+      <p class="mt-3 text-body leading-relaxed">
+        Capacidad backend/cloud especializada en Java, Spring Boot, AWS y Kubernetes —
+        integraciones, despliegues, rendimiento y observabilidad — cuando un equipo necesita
+        cerrar un bloque técnico sin incorporar a otra persona a jornada completa.
+      </p>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2">
+        <div class="rounded-lg border border-hairline bg-surface-card p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.1em] text-accent">900-1.500 € · 5-10 días laborables</p>
+          <h3 class="mt-2 font-display text-lg font-600 text-ink">Sprint backend/cloud</h3>
+          <p class="mt-3 text-sm leading-relaxed text-body">
+            Diagnóstico, ejecución acordada, pruebas, documentación y entrega técnica sobre un
+            problema acotado.
+          </p>
+          <p class="mt-4 text-sm text-body-soft">
+            Casos: integración de API, incidencia de despliegue, rendimiento, Docker/CI-CD,
+            observabilidad, migración pequeña o revisión de arquitectura.
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-hairline bg-surface-card p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.1em] text-accent">650 €/mes · hasta 10h</p>
+          <h3 class="mt-2 font-display text-lg font-600 text-ink">Socio técnico mensual</h3>
+          <p class="mt-3 text-sm leading-relaxed text-body">
+            Hasta 10 horas mensuales (no acumulables), con permanencia inicial de tres meses,
+            para correcciones, pequeñas evoluciones, asesoramiento y capacidad reservada.
+          </p>
+          <p class="mt-4 text-xs text-body-soft">
+            Exceso a 70 €/hora con aprobación previa. No incluye guardias, soporte 24/7 ni
+            proyectos grandes.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-kz mt-14 max-w-2xl">
+      <h2 class="font-display text-2xl font-600 text-ink">Cómo funciona</h2>
+      <p class="mt-4 text-body leading-relaxed">
+        Empezamos con un diagnóstico breve, sin coste, para confirmar que hay un problema real
+        que merece la pena resolver. Si hay encaje, el primer sprint entrega valor rápido y
+        verificable. A partir de ahí, un plan mensual reserva capacidad para mantener y evolucionar
+        lo construido, sin tener que presupuestar cada ajuste pequeño por separado.
+      </p>
+
+      <p class="mt-10 text-body">
+        <a href="/#contacto" class="text-ink underline underline-offset-2">Cuéntame tu caso</a>
+        {' '}y revisamos en quince minutos si tiene sentido.
+      </p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

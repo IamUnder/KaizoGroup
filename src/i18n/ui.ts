@@ -239,6 +239,7 @@ export const ui: Record<Lang, Dictionary> = {
         { label: 'Privacidad', href: '/legal/privacidad' },
       ],
       resourceLinks: [
+        { label: 'Servicios y precios', href: '/servicios' },
         { label: 'Cómo funciona el cobro', href: '/cobro' },
         { label: 'Soporte', href: '/soporte' },
         { label: 'Todas las dudas', href: '/dudas' },
@@ -406,6 +407,7 @@ export const ui: Record<Lang, Dictionary> = {
         { label: 'Privacy policy', href: '/en/legal/privacy-policy' },
       ],
       resourceLinks: [
+        { label: 'Services & pricing', href: '/en/services' },
         { label: 'How billing works', href: '/en/billing' },
         { label: 'Support', href: '/en/support' },
         { label: 'All FAQs', href: '/en/faq' },
