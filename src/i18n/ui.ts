@@ -118,6 +118,7 @@ export interface Dictionary {
     messagePrefix: string;
   };
   heroQuizTeaser: string;
+  heroServicesTeaser: string;
 }
 
 export const ui: Record<Lang, Dictionary> = {
@@ -288,6 +289,7 @@ export const ui: Record<Lang, Dictionary> = {
       messagePrefix: 'Cuestionario "¿Podemos ayudarte?"',
     },
     heroQuizTeaser: '¿No sabes por dónde empezar? Haz el test',
+    heroServicesTeaser: 'Ver servicios y precios cerrados',
   },
   en: {
     htmlLang: 'en',
@@ -456,6 +458,7 @@ export const ui: Record<Lang, Dictionary> = {
       messagePrefix: 'Quiz "Can we help you?"',
     },
     heroQuizTeaser: 'Not sure where to start? Take the quiz',
+    heroServicesTeaser: 'See fixed-scope services and pricing',
   },
 };
 
